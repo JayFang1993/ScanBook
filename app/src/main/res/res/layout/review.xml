@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout"
+    android:orientation="vertical"
+    android:background="@color/white"
+	>
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@color/white"
+	    android:orientation="vertical" >
+
+	<!-- ListView -->
+
+		<ListView
+		    android:id="@+id/main_list"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@color/white"
+		    android:cacheColorHint="#00000000"
+		    android:divider="@drawable/line"
+		    android:listSelector="@drawable/listview_selector" />
+
+	</LinearLayout>
+	<TextView
+	    android:id="@+id/review_no"
+	    android:layout_width="fill_parent"
+	    android:layout_height="40dp"
+	    android:textSize="25sp"
+	    android:textColor="@color/black"
+		android:layout_marginTop="10dp"
+	    android:visibility="gone"
+	    android:text="没有该书的笔记"	    
+	    android:gravity="center"
+	    />
+</LinearLayout>

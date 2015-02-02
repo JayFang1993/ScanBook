@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="theme_full_Screen" parent="android:Theme.Black">
+	    <item name="android:windowNoTitle">true</item>
+	    <item name="android:windowFullscreen">?android:windowNoTitle</item>
+	</style>
+	<style name="theme_NoTitle" parent="android:Theme.Black">
+	    <item name="android:windowNoTitle">true</item>
+	</style>
+
+	
+	
+    <style name="CustomizedWindowTitleBackground">
+        <item name="android:background">#047BF0</item>
+    </style>
+    <style name="titlebarstyle" parent="android:Theme">
+        <item name="android:windowTitleSize">48dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomizedWindowTitleBackground</item>
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>
