@@ -25,5 +25,15 @@
         android:layout_centerHorizontal="true"
         android:text="@string/capture_tip"
         android:textSize="14.0sp" />
-
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="广告位"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 </RelativeLayout>

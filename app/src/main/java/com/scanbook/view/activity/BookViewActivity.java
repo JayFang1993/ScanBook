@@ -1,4 +1,4 @@
-package com.scanbook;
+package com.scanbook.view.activity;
 import com.scanbook.R;
 import com.scanbook.bean.Book;
 import android.app.Activity;
@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,13 +25,12 @@ public class BookViewActivity extends Activity {
 	private TextView tv_content_menu;
     private ImageView image;
     private ImageView arrow;
-    private Button btn_back;
-    
+
     private Book book; 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.bookview);
+        this.setContentView(R.layout.activity_bookview);
 
         tv_title=(TextView)findViewById(R.id.bookview_title);
         tv_author=(TextView)findViewById(R.id.bookview_author);

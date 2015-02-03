@@ -19,7 +19,7 @@ package com.zxing.decoding;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
-import com.scanbook.CaptureActivity;
+import com.scanbook.view.activity.CaptureActivity;
 
 import android.os.Handler;
 import android.os.Looper;

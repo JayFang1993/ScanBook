@@ -17,8 +17,8 @@
 <resources>
 
     <color name="actionbar">#6295f4</color>
-
-
+    <color name="rippelColor">#FFFFFF</color>
+    <color name="search_item_bg">#cccccc</color>
 
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>

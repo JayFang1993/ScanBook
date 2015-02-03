@@ -18,8 +18,8 @@ package com.zxing.decoding;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.scanbook.CaptureActivity;
-import com.scanbook.MainActivity;
+import com.scanbook.view.activity.CaptureActivity;
+import com.scanbook.view.activity.MainActivity;
 import com.scanbook.R;
 import com.zxing.camera.CameraManager;
 import com.zxing.view.*;

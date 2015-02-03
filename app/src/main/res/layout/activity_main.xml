@@ -1,9 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ripple="http://schemas.android.com/apk/res/com.scanbook"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
     android:textColor="#000000"
     android:baselineAligned="false"
     android:background="@color/white"
@@ -27,10 +26,26 @@
         android:layout_marginBottom="50dp"
         android:textColor="@color/black"
         android:textSize="20sp"/>
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="300dp"
-        android:id="@+id/main_button01"
-        android:text="开始扫描ISBN"
-        android:textColor="#ff0300"/>
+
+
+    <com.scanbook.view.RippleView
+        android:id="@+id/rl_scan"
+        android:layout_width="fill_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_height="50dp"
+        ripple:rv_centered="true">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="开始扫描ISBN"
+            android:textSize="18sp"
+            android:background="@color/actionbar"
+            android:textColor="@color/white"
+           />
+
+    </com.scanbook.view.RippleView>
 </LinearLayout>

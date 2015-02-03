@@ -1,4 +1,4 @@
-package com.scanbook;
+package com.scanbook.view.activity;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.Window;
@@ -52,12 +54,11 @@ public class CaptureActivity extends Activity implements Callback {
 	private boolean playBeep;
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
-	private Button btn_back;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.camera);
+		setContentView(R.layout.activity_capture);
         
 		CameraManager.init(this);
 		
@@ -65,6 +66,8 @@ public class CaptureActivity extends Activity implements Callback {
 		txtResult = (TextView) findViewById(R.id.txtResult);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
+
+
 	}
 
 	@SuppressWarnings("deprecation")
@@ -200,4 +203,24 @@ public class CaptureActivity extends Activity implements Callback {
 		}
 	};
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.i("fangjie","111");
+        getActionBar().setHomeButtonEnabled(true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        int itemId = item.getItemId();
+        Log.i("fangjie","333");
+        switch (itemId) {
+            case android.R.id.home:
+                Log.i("fangjie","2222");
+                finish();
+                break;
+        }
+        return true;
+    }
 }

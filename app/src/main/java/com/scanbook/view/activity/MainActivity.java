@@ -1,4 +1,4 @@
-package com.scanbook;
+package com.scanbook.view.activity;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,10 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.scanbook.R;
 import com.scanbook.bean.Book;
 import com.scanbook.util.BookUtil;
 
@@ -27,7 +28,7 @@ import com.scanbook.util.BookUtil;
 @SuppressLint("HandlerLeak")
 public class MainActivity extends Activity {
     private TextView tx1;
-    private Button btn;
+    private RelativeLayout mRlBtn;
     private Handler handler;
     private ProgressDialog progressDialog;
 
@@ -42,7 +43,7 @@ public class MainActivity extends Activity {
         str.append("3.显示在界面上").append("\n");
         tx1=(TextView)findViewById(R.id.main_textview01);
         tx1.setText(str.toString());
-        btn=(Button)findViewById(R.id.main_button01);
+        mRlBtn=(RelativeLayout)findViewById(R.id.rl_scan);
         
         //接收来自下载线程的消息
         handler=new Handler(){
@@ -66,7 +67,7 @@ public class MainActivity extends Activity {
         };
         
         //“开始扫描”按钮的监听事件
-        btn.setOnClickListener(new View.OnClickListener() {
+        mRlBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             	Intent intent=new Intent(MainActivity.this,CaptureActivity.class);
@@ -140,6 +141,14 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id){
+            case R.id.actionbar_search:
+                Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
         return super.onMenuItemSelected(featureId, item);
     }
 }

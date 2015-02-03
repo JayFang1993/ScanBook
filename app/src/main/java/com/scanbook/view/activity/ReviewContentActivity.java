@@ -1,4 +1,4 @@
-package com.scanbook;
+package com.scanbook.view.activity;
 import com.scanbook.R;
 import android.app.Activity;
 import android.content.Intent;

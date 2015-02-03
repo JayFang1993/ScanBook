@@ -3,45 +3,64 @@
     package="com.scanbook"
     android:versionCode="1"
     android:versionName="1.0" >
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/appname"
         android:theme="@style/CustomActionBarTheme" >
         <activity
-            android:name="com.scanbook.MainActivity"
-            android:label="@string/appname">
+            android:name=".view.activity.MainActivity"
+            android:label="@string/appname" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.scanbook.BookViewActivity"
+            android:name=".view.activity.BookViewActivity"
             android:label="@string/appname" >
         </activity>
         <activity
+            android:name=".view.activity.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:name="com.scanbook.CaptureActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/CustomActionBarThemeBack"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name="com.scanbook.ReviewListActivity"
+            android:name=".view.activity.ReviewListActivity"
             android:label="@string/appname" >
         </activity>
         <activity
-            android:name="com.scanbook.ReviewContentActivity"
+            android:name=".view.activity.ReviewContentActivity"
             android:label="@string/appname" >
         </activity>
+        <activity
+            android:name=".view.activity.SearchActivity"
+            android:theme="@style/CustomActionBarThemeBack"
+            android:label="@string/title_activity_search" >
+        </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+
 </manifest>

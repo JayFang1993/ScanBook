@@ -8,8 +8,8 @@
     </style>
 
     <!-- ActionBar 样式 -->
-    <style name="MyActionBar"
-        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:titleTextStyle">@style/ActionBarTitle</item>
         <item name="android:background">@color/actionbar</item>
         <item name="android:icon">@android:color/transparent</item>
     </style>
@@ -17,5 +17,23 @@
     <!-- more icon 样式 -->
     <style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
         <item name="android:src">@drawable/more</item>
+    </style>
+
+    <style name="ActionBarTitle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingLeft">180dp</item>
+    </style>
+
+
+    <style name="CustomActionBarThemeBack"
+        parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBarBack</item>
+    </style>
+    <style name="MyActionBarBack"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:titleTextStyle">@style/ActionBarTitle</item>
+        <item name="android:background">@color/actionbar</item>
+        <item name="android:icon">@drawable/back</item>
     </style>
 </resources>
