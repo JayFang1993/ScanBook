@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/search_item_bg"
+    android:minHeight="120dp"
+    android:layout_height="120dp">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:background="@drawable/corners"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:layout_height="fill_parent">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <com.scanbook.view.CircleImageView
+                android:id="@+id/iv_annotation_head_icon"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="50dp"
+                android:src="@drawable/ic_launcher"
+                android:scaleType="centerCrop"
+                android:layout_height="50dp" />
+            <TextView
+                android:id="@+id/tv_annotation_user"
+                android:layout_toRightOf="@id/iv_annotation_head_icon"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:text="昵称"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_annotation_time"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:text="2014-10-2"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_annotation_cheapter"
+                android:layout_toRightOf="@id/iv_annotation_head_icon"
+                android:layout_below="@id/tv_annotation_user"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:text="一个人要像一支队伍"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_annotation_page"
+                android:layout_toRightOf="@id/tv_annotation_cheapter"
+                android:layout_below="@id/tv_annotation_user"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:text="194页"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_annotation_summary"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</LinearLayout>
