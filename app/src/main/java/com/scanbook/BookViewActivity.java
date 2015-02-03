@@ -33,10 +33,7 @@ public class BookViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         this.setContentView(R.layout.bookview);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-                R.layout.titlebar);   
 
         tv_title=(TextView)findViewById(R.id.bookview_title);
         tv_author=(TextView)findViewById(R.id.bookview_author);
@@ -52,7 +49,8 @@ public class BookViewActivity extends Activity {
         tv_authorinfo=(TextView)findViewById(R.id.bookview_authorinfo);       
         image=(ImageView)findViewById(R.id.bookview_cover);
         arrow=(ImageView)findViewById(R.id.bookview_arrow);
-        
+
+
         //目录展开TextView           
         tv_content_menu=(TextView)findViewById(R.id.bookview_content_menu);
         tv_content_menu.setClickable(true);
@@ -84,17 +82,7 @@ public class BookViewActivity extends Activity {
 				startActivity(intent2);
 			}
 		});  
-        
-        //返回按钮
-        btn_back=(Button)findViewById(R.id.titlebar_bt_back);
-        btn_back.setVisibility(View.VISIBLE);       
-        btn_back.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent1=new Intent(BookViewActivity.this,MainActivity.class);
-				startActivity(intent1);
-				finish();
-			}
-		});
+
         //获取从MainActivity中传来的Book
         intent=getIntent();
         book=(Book)intent.getParcelableExtra(Book.class.getName());

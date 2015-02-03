@@ -20,9 +20,7 @@ public class ReviewContentActivity extends Activity{
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.content);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.titlebar);  
 		tv_content=(TextView)findViewById(R.id.content_lv_content);
 		tv_author= (TextView)findViewById(R.id.content_lv_author);
 		

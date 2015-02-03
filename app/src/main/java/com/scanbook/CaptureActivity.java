@@ -57,10 +57,7 @@ public class CaptureActivity extends Activity implements Callback {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.camera);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-                R.layout.titlebar);   
         
 		CameraManager.init(this);
 		
@@ -68,17 +65,6 @@ public class CaptureActivity extends Activity implements Callback {
 		txtResult = (TextView) findViewById(R.id.txtResult);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
-		
-        btn_back=(Button)findViewById(R.id.titlebar_bt_back);
-        btn_back.setVisibility(View.VISIBLE);    
-        
-        btn_back.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent1=new Intent(CaptureActivity.this,MainActivity.class);
-				startActivity(intent1);
-				finish();
-			}
-		});
 	}
 
 	@SuppressWarnings("deprecation")

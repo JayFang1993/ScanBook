@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.scanbook.R;
+
 import com.scanbook.bean.Book;
 import com.scanbook.util.BookUtil;
 
@@ -31,10 +33,8 @@ public class MainActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-        setContentView(R.layout.main);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.titlebar);  
-        
+        setContentView(R.layout.activity_main);
+
         //设置初始界面的显示
         StringBuffer str=new StringBuffer();
         str.append("1.按下扫描按钮启动摄像头，扫描并获取书籍的条形码；").append("\n");
@@ -127,5 +127,19 @@ public class MainActivity extends Activity {
 			}
             handler.sendMessage(msg);
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        return super.onMenuItemSelected(featureId, item);
     }
 }

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="theme_full_Screen" parent="android:Theme.Black">
-	    <item name="android:windowNoTitle">true</item>
-	    <item name="android:windowFullscreen">?android:windowNoTitle</item>
-	</style>
-	<style name="theme_NoTitle" parent="android:Theme.Black">
-	    <item name="android:windowNoTitle">true</item>
-	</style>
-
-	
-	
-    <style name="CustomizedWindowTitleBackground">
-        <item name="android:background">#047BF0</item>
+    <!-- 应用于程序或者活动的主题 -->
+    <style name="CustomActionBarTheme"
+        parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
     </style>
-    <style name="titlebarstyle" parent="android:Theme">
-        <item name="android:windowTitleSize">48dp</item>
-        <item name="android:windowTitleBackgroundStyle">@style/CustomizedWindowTitleBackground</item>
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+
+    <!-- ActionBar 样式 -->
+    <style name="MyActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/actionbar</item>
+        <item name="android:icon">@android:color/transparent</item>
+    </style>
+
+    <!-- more icon 样式 -->
+    <style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/more</item>
     </style>
 </resources>

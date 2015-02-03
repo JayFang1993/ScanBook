@@ -63,10 +63,8 @@ public class ReviewListActivity extends Activity{
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.review);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.titlebar);  
-        
+
         curr_num=0;
 		Intent intent=getIntent();
 		book_id=intent.getExtras().getString("id");
@@ -78,8 +76,7 @@ public class ReviewListActivity extends Activity{
 		list.setEnabled(true);
 		
 		review_no=(TextView)findViewById(R.id.review_no);
-		title=(TextView)findViewById(R.id.titlebar_lv_title);
-		list =(ListView)findViewById(R.id.main_list);			
+		list =(ListView)findViewById(R.id.main_list);
 		progressDialog=new ProgressDialog(this);
 		progressDialog.setMessage("正在加载，请稍候...");
 
@@ -111,17 +108,7 @@ public class ReviewListActivity extends Activity{
 				loadnews.execute();
 			}
 		});
-        
-        //返回按钮
-        btn_back=(Button)findViewById(R.id.titlebar_bt_back);
-        btn_back.setVisibility(View.VISIBLE);       
-        btn_back.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent1=new Intent(ReviewListActivity.this,MainActivity.class);
-				startActivity(intent1);
-				finish();
-			}
-		});
+
 	}
 
 	//异步加载数据的类
