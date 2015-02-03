@@ -1,13 +1,28 @@
 package com.scanbook.view.activity;
+import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.scanbook.R;
 import com.scanbook.bean.Book;
+import com.scanbook.net.BaseAsyncHttp;
+import com.scanbook.net.HttpResponseHandler;
+import com.scanbook.view.PromotedActionsLibrary;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.json.JSONObject;
 
 /**
  * <a href="http://fangjie.sinaapp.com">http://fangjie.sinaapp.com</a>
@@ -17,91 +32,136 @@ import android.widget.TextView;
  */
 
 public class BookViewActivity extends Activity {
-    private Intent intent;
-    private TextView tv_rate,tv_price,tv_title,tv_author,tv_publisher,tv_date,tv_isbn,tv_summary;
-    private TextView tv_page,tv_tags;
-	private static TextView tv_content;
-	private TextView tv_authorinfo;
-	private TextView tv_content_menu;
-    private ImageView image;
-    private ImageView arrow;
 
-    private Book book; 
+
+    private TextView mTvRate,mTvPrice,mTvAuthor,mTvPublisher,mTvDate,mTvIsbn,mTvSummary,mTvPage,mTvtags,mTvContent;
+    private ImageView mIvIcon;
+
+    private Book mBook;
+
+    private RelativeLayout mRlAnnotation;
+    private String isbn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_bookview);
 
-        tv_title=(TextView)findViewById(R.id.bookview_title);
-        tv_author=(TextView)findViewById(R.id.bookview_author);
-        tv_publisher=(TextView)findViewById(R.id.bookview_publisher);
-        tv_date=(TextView)findViewById(R.id.bookview_publisherdate);
-        tv_isbn=(TextView)findViewById(R.id.bookview_isbn);
-        tv_summary=(TextView)findViewById(R.id.bookview_summary);
-        tv_rate=(TextView)findViewById(R.id.bookview_rate);
-        tv_price=(TextView)findViewById(R.id.bookview_price);
-        tv_page=(TextView)findViewById(R.id.bookview_pages);
-        tv_content=(TextView)findViewById(R.id.bookview_content);
-        tv_tags=(TextView)findViewById(R.id.bookview_tag);
-        tv_authorinfo=(TextView)findViewById(R.id.bookview_authorinfo);       
-        image=(ImageView)findViewById(R.id.bookview_cover);
-        arrow=(ImageView)findViewById(R.id.bookview_arrow);
+        isbn=getIntent().getStringExtra("isbn");
+        RequestParams params=new RequestParams();
+        BaseAsyncHttp.getReq("/v2/book/isbn/"+isbn,params,new HttpResponseHandler() {
+            @Override
+            public void jsonSuccess(JSONObject resp) {
+                mBook=new Book();
+                mBook.setId(resp.optString("id"));
+                mBook.setRate(resp.optJSONObject("rating").optDouble("average"));
+                mBook.setAuthor(resp.optJSONArray("author").opt(0).toString());
+                mBook.setAuthorInfo(resp.optString("author_intro"));
+                mBook.setBitmap(resp.optString("image"));
+                mBook.setId(resp.optString("id"));
+                mBook.setTitle(resp.optString("title"));
+                mBook.setPublisher(resp.optString("publisher"));
+                mBook.setPublishDate(resp.optString("pubdate"));
+                mBook.setISBN(resp.optString("isbn13"));
+                mBook.setSummary(resp.optString("summary"));
+                mBook.setPage(resp.optString("pages"));
+                mBook.setPrice(resp.optString("price"));
+                mBook.setContent(resp.optString("catalog"));
+                updateToView();
+            }
+        });
+
+        mRlAnnotation=(RelativeLayout)findViewById(R.id.rl_review);
+        mRlAnnotation.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(new Runnable(){
+                    public void run() {
+                        Intent intent=new Intent(BookViewActivity.this,AnnotationListActivity.class);
+                        intent.putExtra("id",mBook.getId());
+                        startActivity(intent);
+                    }
+                }, 500);
+
+            }
+        });
+        initBtn();
+        findViews();
+    }
+
+    private void findViews(){
+        mTvAuthor=(TextView)findViewById(R.id.tv_book_author);
+        mTvPublisher=(TextView)findViewById(R.id.tv_book_publicer);
+        mTvDate=(TextView)findViewById(R.id.tv_book_time);
+        mTvIsbn=(TextView)findViewById(R.id.tv_book_isbn);
+        mTvRate=(TextView)findViewById(R.id.tv_book_score);
+        mTvPrice=(TextView)findViewById(R.id.tv_book_price);
+        mTvPage=(TextView)findViewById(R.id.tv_book_page);
+        mTvtags=(TextView)findViewById(R.id.tv_book_tag);
+        mIvIcon=(ImageView)findViewById(R.id.iv_book_icon);
+        mTvSummary=(TextView)findViewById(R.id.tv_book_intro_content);
+        mTvContent=(TextView)findViewById(R.id.tv_book_mulu_content);
+    }
 
 
-        //目录展开TextView           
-        tv_content_menu=(TextView)findViewById(R.id.bookview_content_menu);
-        tv_content_menu.setClickable(true);
-        tv_content_menu.setFocusable(true);        
-        tv_content_menu.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(BookViewActivity.tv_content.getVisibility()==View.GONE)
-				{
-					arrow.setImageResource(R.drawable.down);
-					BookViewActivity.tv_content.setVisibility(View.VISIBLE);
-				}
-				else
-				{
-					arrow.setImageResource(R.drawable.right);
-					BookViewActivity.tv_content.setVisibility(View.GONE);
-				}
-			}
-		});
-        //豆瓣书评弹出TextView
-        tv_content_menu=(TextView)findViewById(R.id.bookview_review);
-        tv_content_menu.setClickable(true);
-        tv_content_menu.setFocusable(true);        
-        tv_content_menu.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent intent2=new Intent(BookViewActivity.this,ReviewListActivity.class);
-				intent2.putExtra("id", book.getId());
-				intent2.putExtra("name", book.getTitle());
-				startActivity(intent2);
-			}
-		});  
+    private void updateToView(){
+        mTvAuthor.setText(mBook.getAuthor());
+        mTvPublisher.setText(mBook.getPublisher());
+        mTvDate.setText(mBook.getPublishDate());
+        mTvIsbn.setText(mBook.getISBN());
+        mTvRate.setText(mBook.getRate()+"分");
+        mTvPrice.setText(mBook.getPrice());
+        mTvPage.setText(mBook.getPage());
+        mTvSummary.setText(mBook.getSummary());
+        mTvContent.setText(mBook.getContent());
+        mTvtags.setText(mBook.getTag());
+        ImageLoader.getInstance().displayImage(mBook.getBitmap(),mIvIcon);
+    }
 
-        //获取从MainActivity中传来的Book
-        intent=getIntent();
-        book=(Book)intent.getParcelableExtra(Book.class.getName());
+    private void initBtn(){
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.container);
+        PromotedActionsLibrary promotedActionsLibrary = new PromotedActionsLibrary();
+        promotedActionsLibrary.setup(getApplicationContext(), frameLayout);
 
-        //将Book信息显示在控件上
-        if(book.getRate().equals("0.0"))
-            tv_rate.setText("少于10人评价");
-        else
-            tv_rate.setText("评分:"+book.getRate()+"分");
-        tv_title.setText(book.getTitle());
-        tv_author.setText("作者:"+book.getAuthor());
-        tv_publisher.setText("出版社:"+book.getPublisher());
-        tv_date.setText("出版时间:"+book.getPublishDate());
-        tv_isbn.setText("ISBN:"+book.getISBN());
-        tv_summary.setText(book.getSummary());
-        tv_page.setText("页数:"+book.getPage());
-        tv_price.setText("定价:"+book.getPrice());
-        tv_content.setText(book.getContent());
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        tv_authorinfo.setText(book.getAuthorInfo());
-        tv_tags.setText("标签:"+book.getTag());
-        image.setImageBitmap(book.getBitmap()); 
+            }
+        };
+        promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_menu_edit), new OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+        promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_menu_send), new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_input_get), new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        promotedActionsLibrary.addMainItem(getResources().getDrawable(android.R.drawable.ic_input_add));
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }

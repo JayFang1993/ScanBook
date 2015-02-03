@@ -25,6 +25,7 @@
         android:maxSdkVersion="18" />
 
     <application
+        android:name=".GlApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/appname"
@@ -39,6 +40,7 @@
         </activity>
         <activity
             android:name=".view.activity.BookViewActivity"
+            android:theme="@style/CustomActionBarThemeBack"
             android:label="@string/appname" >
         </activity>
         <activity
@@ -49,11 +51,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".view.activity.ReviewListActivity"
-            android:label="@string/appname" >
-        </activity>
-        <activity
-            android:name=".view.activity.ReviewContentActivity"
+            android:name=".view.activity.AnnotationListActivity"
+            android:theme="@style/CustomActionBarThemeBack"
             android:label="@string/appname" >
         </activity>
         <activity
@@ -62,5 +61,4 @@
             android:label="@string/title_activity_search" >
         </activity>
     </application>
-
 </manifest>

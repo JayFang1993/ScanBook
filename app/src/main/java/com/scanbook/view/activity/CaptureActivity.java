@@ -206,7 +206,6 @@ public class CaptureActivity extends Activity implements Callback {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.i("fangjie","111");
         getActionBar().setHomeButtonEnabled(true);
         return super.onCreateOptionsMenu(menu);
     }
@@ -214,10 +213,8 @@ public class CaptureActivity extends Activity implements Callback {
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         int itemId = item.getItemId();
-        Log.i("fangjie","333");
         switch (itemId) {
             case android.R.id.home:
-                Log.i("fangjie","2222");
                 finish();
                 break;
         }

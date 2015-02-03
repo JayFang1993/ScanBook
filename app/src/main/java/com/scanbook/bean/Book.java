@@ -4,12 +4,6 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * <a href="http://fangjie.sinaapp.com">http://fangjie.sinaapp.com</a>
- * @version 1.0
- * @author JayFang
- * @describe 图书信息实体类
- */
 public class Book implements Parcelable {
 	//图书ID
 	private String id;
@@ -30,7 +24,7 @@ public class Book implements Parcelable {
     //图书页数
     private String Page;
     //图书评分
-    private String Rate;
+    private double Rate;
     //图书标签
     private String Tag;
     //图书目录
@@ -38,7 +32,7 @@ public class Book implements Parcelable {
     //图书摘要
     private String Summary;
     //图书图片
-    private Bitmap Bitmap;
+    private String Bitmap;
 
 
 	public String getId() {
@@ -95,12 +89,7 @@ public class Book implements Parcelable {
 	public void setPage(String page) {
 		Page = page;
 	}
-	public String getRate() {
-		return Rate;
-	}
-	public void setRate(String rate) {
-		Rate = rate;
-	}
+
 	public String getTag() {
 		return Tag;
 	}
@@ -119,21 +108,39 @@ public class Book implements Parcelable {
 	public void setSummary(String summary) {
 		Summary = summary;
 	}
-	public Bitmap getBitmap() {
-		return Bitmap;
-	}
-	public void setBitmap(Bitmap bitmap) {
-		Bitmap = bitmap;
-	}
-	
-	/*
-	 * 实现Parcelable接口的方法
-	 * 1.getCreator()
-	 * 2.setCreator()
-	 * 3.Parcelable.Creator() 构造方法
-	 * 4.describeContents()
-	 * 5.writeToParcel()
-	 */
+
+    public String getBitmap() {
+        return Bitmap;
+    }
+
+    public void setBitmap(String bitmap) {
+        Bitmap = bitmap;
+    }
+
+    public double getRate() {
+        return Rate;
+    }
+
+    public void setRate(double rate) {
+        Rate = rate;
+    }
+
+    public static Creator<Book> getCREATOR() {
+        return CREATOR;
+    }
+
+    public static void setCREATOR(Creator<Book> CREATOR) {
+        Book.CREATOR = CREATOR;
+    }
+
+    /*
+             * 实现Parcelable接口的方法
+             * 1.getCreator()
+             * 2.setCreator()
+             * 3.Parcelable.Creator() 构造方法
+             * 4.describeContents()
+             * 5.writeToParcel()
+             */
 	public static Creator<Book> getCreator() {
 		return CREATOR;
 	}
@@ -146,7 +153,7 @@ public class Book implements Parcelable {
         public Book createFromParcel(Parcel source) {
             Book bookInfo = new Book();
             bookInfo.Title = source.readString();
-            bookInfo.Bitmap = source.readParcelable(Bitmap.class.getClassLoader());
+            bookInfo.Bitmap = source.readString();
             bookInfo.Author = source.readString();
             bookInfo.Publisher = source.readString();
             bookInfo.PublishDate = source.readString();
@@ -156,7 +163,7 @@ public class Book implements Parcelable {
             bookInfo.AuthorInfo=source.readString();
             bookInfo.Page=source.readString();
             bookInfo.Price=source.readString();;
-            bookInfo.Rate=source.readString();
+            bookInfo.Rate=source.readDouble();
             bookInfo.Tag=source.readString();
             bookInfo.Content=source.readString();
             return bookInfo;
@@ -172,7 +179,7 @@ public class Book implements Parcelable {
     
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(Title);
-        dest.writeParcelable(Bitmap, flags);
+        dest.writeString(Bitmap);
         dest.writeString(Author);
         dest.writeString(Publisher);
         dest.writeString(PublishDate);
@@ -182,7 +189,7 @@ public class Book implements Parcelable {
         dest.writeString(AuthorInfo);
         dest.writeString(Page);
         dest.writeString(Price);
-        dest.writeString(Rate);
+        dest.writeDouble(Rate);
         dest.writeString(Tag);
         dest.writeString(Content);
     }
