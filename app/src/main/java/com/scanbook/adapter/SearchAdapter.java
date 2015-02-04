@@ -5,8 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.scanbook.R;
+import com.scanbook.bean.Book;
+
+import java.util.List;
 
 /**
  * Created by Jay on 15/2/3.
@@ -14,31 +20,61 @@ import com.scanbook.R;
 public class SearchAdapter extends BaseAdapter {
 
         private Context context;
-        public SearchAdapter(Context context) {
+        private List<Book> mlist;
+
+        public SearchAdapter(Context context,List<Book> mlist) {
             this.context=context;
+            this.mlist=mlist;
         }
 
         @Override
         public int getCount() {
-            return 10;
+            return mlist.size();
         }
 
         @Override
         public Object getItem(int arg0) {
-            return null;
+            return arg0;
         }
 
         @Override
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = ((LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_search, null);
-            return convertView;
+            ViewHolder holder=null;
+            if(convertView==null) {
+                convertView = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_search, null);
+                holder=new ViewHolder();
+                holder.name=(TextView)convertView.findViewById(R.id.tv_search_item_title);
+                holder.author=(TextView)convertView.findViewById(R.id.tv_search_item_author);
+                holder.score=(TextView)convertView.findViewById(R.id.tv_search_item_score);
+                convertView.setTag(holder);
+            }else{
+                holder = (ViewHolder)convertView.getTag();
+            }
+            holder.icon=(ImageView)convertView.findViewById(R.id.iv_search_icon);
+            holder.name.setText(mlist.get(position).getTitle());
+            holder.author.setText(mlist.get(position).getAuthor());
+            holder.score.setText(mlist.get(position).getRate()+"页");
+            ImageLoader.getInstance().displayImage(mlist.get(position).getBitmap(),holder.icon);
 
+            return convertView;
         }
 
+
+        public void setData(List<Book> list){
+            mlist=list;
+        }
+
+
+    class ViewHolder{
+        ImageView icon;
+        TextView name;
+        TextView author;
+        TextView score;
+    }
 
 }

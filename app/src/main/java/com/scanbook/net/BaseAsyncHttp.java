@@ -3,6 +3,7 @@ package com.scanbook.net;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.FileAsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -30,5 +31,8 @@ public class BaseAsyncHttp extends AsyncHttpClient{
         new AsyncHttpClient().get(HOST+url,params,hander);
     }
 
+    public static void downLoadFile(String url,FileAsyncHttpResponseHandler handler){
+        new AsyncHttpClient().get(url,handler);
+    }
 
 }

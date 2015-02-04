@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
                         Intent intent=new Intent(MainActivity.this,CaptureActivity.class);
                         startActivityForResult(intent,100);
                     }
-                }, 500);
+                }, 1000);
             }
         });
     }

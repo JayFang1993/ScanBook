@@ -34,8 +34,17 @@ public class Book implements Parcelable {
     //图书图片
     private String Bitmap;
 
+    private String Url;
 
-	public String getId() {
+    public String getUrl() {
+        return Url;
+    }
+
+    public void setUrl(String url) {
+        Url = url;
+    }
+
+    public String getId() {
 		return id;
 	}
 	public void setId(String id) {
@@ -165,6 +174,7 @@ public class Book implements Parcelable {
             bookInfo.Price=source.readString();;
             bookInfo.Rate=source.readDouble();
             bookInfo.Tag=source.readString();
+            bookInfo.Url=source.readString();
             bookInfo.Content=source.readString();
             return bookInfo;
         }
@@ -190,6 +200,7 @@ public class Book implements Parcelable {
         dest.writeString(Page);
         dest.writeString(Price);
         dest.writeDouble(Rate);
+        dest.writeString(Url);
         dest.writeString(Tag);
         dest.writeString(Content);
     }

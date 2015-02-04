@@ -11,6 +11,7 @@
         android:orientation="horizontal"
         android:layout_height="fill_parent">
         <ImageView
+            android:id="@+id/iv_search_icon"
             android:layout_width="100dp"
             android:src="@drawable/ic_launcher"
             android:scaleType="centerCrop"

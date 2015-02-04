@@ -3,6 +3,8 @@ import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.scanbook.R;
 import com.scanbook.bean.Book;
+import com.scanbook.common.Share2Weibo;
+import com.scanbook.common.Share2Weixin;
 import com.scanbook.net.BaseAsyncHttp;
 import com.scanbook.net.HttpResponseHandler;
 import com.scanbook.view.PromotedActionsLibrary;
@@ -45,30 +47,16 @@ public class BookViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_bookview);
+        initBtn();
+        findViews();
+        if(getIntent().hasExtra("book")){
+            mBook=(Book)getIntent().getParcelableExtra("book");
+            updateToView();
+        }else if(getIntent().hasExtra("isbn")){
 
-        isbn=getIntent().getStringExtra("isbn");
-        RequestParams params=new RequestParams();
-        BaseAsyncHttp.getReq("/v2/book/isbn/"+isbn,params,new HttpResponseHandler() {
-            @Override
-            public void jsonSuccess(JSONObject resp) {
-                mBook=new Book();
-                mBook.setId(resp.optString("id"));
-                mBook.setRate(resp.optJSONObject("rating").optDouble("average"));
-                mBook.setAuthor(resp.optJSONArray("author").opt(0).toString());
-                mBook.setAuthorInfo(resp.optString("author_intro"));
-                mBook.setBitmap(resp.optString("image"));
-                mBook.setId(resp.optString("id"));
-                mBook.setTitle(resp.optString("title"));
-                mBook.setPublisher(resp.optString("publisher"));
-                mBook.setPublishDate(resp.optString("pubdate"));
-                mBook.setISBN(resp.optString("isbn13"));
-                mBook.setSummary(resp.optString("summary"));
-                mBook.setPage(resp.optString("pages"));
-                mBook.setPrice(resp.optString("price"));
-                mBook.setContent(resp.optString("catalog"));
-                updateToView();
-            }
-        });
+            isbn=getIntent().getStringExtra("isbn");
+            getRequestData(isbn);
+        }
 
         mRlAnnotation=(RelativeLayout)findViewById(R.id.rl_review);
         mRlAnnotation.setOnClickListener(new OnClickListener() {
@@ -80,12 +68,11 @@ public class BookViewActivity extends Activity {
                         intent.putExtra("id",mBook.getId());
                         startActivity(intent);
                     }
-                }, 500);
+                }, 1000);
 
             }
         });
-        initBtn();
-        findViews();
+
     }
 
     private void findViews(){
@@ -102,6 +89,40 @@ public class BookViewActivity extends Activity {
         mTvContent=(TextView)findViewById(R.id.tv_book_mulu_content);
     }
 
+    public void getRequestData(String isbn){
+        RequestParams params=new RequestParams();
+        BaseAsyncHttp.getReq("/v2/book/isbn/"+isbn,params,new HttpResponseHandler() {
+            @Override
+            public void jsonSuccess(JSONObject resp) {
+                mBook=new Book();
+                mBook.setId(resp.optString("id"));
+                mBook.setRate(resp.optJSONObject("rating").optDouble("average"));
+                String authors="";
+                for (int j=0;j<resp.optJSONArray("author").length();j++){
+                    authors=authors+" "+resp.optJSONArray("author").optString(j);
+                }
+                mBook.setAuthor(authors);
+                String tags="";
+                for (int j=0;j<resp.optJSONArray("tags").length();j++){
+                    tags=tags+" "+resp.optJSONArray("tags").optJSONObject(j).optString("name");
+                }
+                mBook.setTag(tags);
+                mBook.setAuthorInfo(resp.optString("author_intro"));
+                mBook.setBitmap(resp.optString("image"));
+                mBook.setId(resp.optString("id"));
+                mBook.setTitle(resp.optString("title"));
+                mBook.setPublisher(resp.optString("publisher"));
+                mBook.setPublishDate(resp.optString("pubdate"));
+                mBook.setISBN(resp.optString("isbn13"));
+                mBook.setSummary(resp.optString("summary"));
+                mBook.setPage(resp.optString("pages"));
+                mBook.setPrice(resp.optString("price"));
+                mBook.setContent(resp.optString("catalog"));
+                mBook.setUrl(resp.optString("ebook_url"));
+                updateToView();
+            }
+        });
+    }
 
     private void updateToView(){
         mTvAuthor.setText(mBook.getAuthor());
@@ -131,19 +152,36 @@ public class BookViewActivity extends Activity {
         promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_menu_edit), new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
+                intent.putExtra("url",mBook.getUrl());
+                intent.putExtra("score",mBook.getRate()+"");
+                intent.putExtra("picurl",mBook.getBitmap());
+                intent.putExtra("name",mBook.getTitle());
+                intent.putExtra("type",2);
+                startActivity(intent);
             }
         });
         promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_menu_send), new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent=new Intent(BookViewActivity.this,Share2Weibo.class);
+                intent.putExtra("url",mBook.getUrl());
+                intent.putExtra("score",mBook.getRate()+"");
+                intent.putExtra("picurl",mBook.getBitmap());
+                intent.putExtra("name",mBook.getTitle());
+                startActivity(intent);
             }
         });
         promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_input_get), new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
+                intent.putExtra("url",mBook.getUrl());
+                intent.putExtra("score",mBook.getRate()+"");
+                intent.putExtra("picurl",mBook.getBitmap());
+                intent.putExtra("name",mBook.getTitle());
+                intent.putExtra("type",1);
+                startActivity(intent);
             }
         });
         promotedActionsLibrary.addMainItem(getResources().getDrawable(android.R.drawable.ic_input_add));
