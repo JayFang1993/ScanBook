@@ -113,18 +113,20 @@ public class SearchActivity extends Activity {
         mAdapter.setData(mBooks);
         mAdapter.notifyDataSetChanged();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
+        getActionBar().setHomeButtonEnabled(true);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-
-        return super.onOptionsItemSelected(item);
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }

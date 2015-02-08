@@ -7,6 +7,8 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -70,4 +72,22 @@ public class AnnotationListActivity extends Activity{
 
 
 	}
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getActionBar().setHomeButtonEnabled(true);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
+    }
 }

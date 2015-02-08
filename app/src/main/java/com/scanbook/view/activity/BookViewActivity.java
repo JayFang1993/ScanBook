@@ -187,11 +187,12 @@ public class BookViewActivity extends Activity {
         promotedActionsLibrary.addMainItem(getResources().getDrawable(android.R.drawable.ic_input_add));
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getActionBar().setHomeButtonEnabled(true);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         int itemId = item.getItemId();
