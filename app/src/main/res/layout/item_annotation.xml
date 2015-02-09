@@ -19,7 +19,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="50dp"
-                android:src="@drawable/ic_launcher"
+                android:src="@drawable/default_head"
                 android:scaleType="centerCrop"
                 android:layout_height="50dp" />
             <TextView
@@ -35,26 +35,43 @@
                 android:id="@+id/tv_annotation_time"
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:text="2014-10-2"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="20dp"
+                android:src="@drawable/chapter"
+                android:layout_toRightOf="@id/iv_annotation_head_icon"
+                android:layout_below="@id/tv_annotation_user"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="20dp" />
             <TextView
                 android:id="@+id/tv_annotation_cheapter"
                 android:layout_toRightOf="@id/iv_annotation_head_icon"
                 android:layout_below="@id/tv_annotation_user"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:text="一个人要像一支队伍"
                 android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tv_annotation_cheapter"
+                android:layout_below="@id/tv_annotation_user"
+                android:src="@drawable/location"/>
             <TextView
                 android:id="@+id/tv_annotation_page"
                 android:layout_toRightOf="@id/tv_annotation_cheapter"
                 android:layout_below="@id/tv_annotation_user"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"

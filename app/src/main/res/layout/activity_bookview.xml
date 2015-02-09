@@ -57,42 +57,42 @@
                         android:layout_marginTop="5dp"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/calendar"
+                        android:src="@drawable/date"
                         />
                     <ImageView
                         android:id="@+id/iv_book_page"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/clipboard"
+                        android:src="@drawable/pages"
                         />
                     <ImageView
                         android:id="@+id/iv_book_publicer"
                         android:layout_width="24dp"
                         android:layout_marginTop="5dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/print"
+                        android:src="@drawable/printer"
                         />
                     <ImageView
                         android:id="@+id/iv_book_isbn"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/map"
+                        android:src="@drawable/isbn"
                         />
                     <ImageView
                         android:id="@+id/iv_book_price"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/cart"
+                        android:src="@drawable/price"
                         />
                     <ImageView
                         android:id="@+id/iv_book_score"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/cart"
+                        android:src="@drawable/score"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -110,7 +110,6 @@
                         android:layout_width="wrap_content"
                         android:text="韩寒"
                         android:layout_height="24dp"
-                        android:src="@drawable/people"
                         />
                     <TextView
                         android:id="@+id/tv_book_time"
@@ -118,7 +117,6 @@
                         android:layout_width="wrap_content"
                         android:text="2014-10"
                         android:layout_height="24dp"
-                        android:src="@drawable/calendar"
                         />
                     <TextView
                         android:id="@+id/tv_book_page"
@@ -126,7 +124,6 @@
                         android:text="112页"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/clipboard"
                         />
                     <TextView
                         android:id="@+id/tv_book_publicer"
@@ -134,7 +131,6 @@
                         android:text="清华大学出版社"
                         android:layout_marginTop="5dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/print"
                         />
                     <TextView
                         android:id="@+id/tv_book_isbn"
@@ -142,7 +138,6 @@
                         android:text="123345567788"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/map"
                         />
                     <TextView
                         android:id="@+id/tv_book_price"
@@ -150,7 +145,6 @@
                         android:text="19.9元"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/cart"
                         />
                     <TextView
                         android:id="@+id/tv_book_score"
@@ -158,7 +152,6 @@
                         android:text="4.7分"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/cart"
                         />
                 </LinearLayout>
                 <RelativeLayout
@@ -170,13 +163,14 @@
                     <ImageView
                         android:id="@+id/iv_book_tag"
                         android:layout_width="24dp"
-                        android:src="@drawable/cart"
+                        android:src="@drawable/tag"
                         android:layout_height="24dp" />
                     <TextView
                         android:id="@+id/tv_book_tag"
                         android:layout_toRightOf="@+id/iv_book_tag"
                         android:layout_marginLeft="10dp"
                         android:text="青春、大学、激情、岁月"
+                        android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp" />
                     <com.scanbook.view.RippleView
@@ -184,6 +178,7 @@
                         android:layout_width="100dp"
                         android:layout_height="36dp"
                         android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         ripple:rv_centered="true">
                         <TextView

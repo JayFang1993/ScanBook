@@ -11,6 +11,12 @@
         android:icon="@drawable/more"
         android:title="@string/feedback"/>
     <item
+        android:id="@+id/actionbar_score"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/more"
+        android:title="@string/score"/>
+    <item
         android:id="@+id/actionbar_aboutme"
         android:orderInCategory="100"
         android:showAsAction="never"

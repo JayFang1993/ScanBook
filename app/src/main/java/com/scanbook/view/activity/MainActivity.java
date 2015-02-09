@@ -2,6 +2,7 @@ package com.scanbook.view.activity;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
@@ -78,9 +79,24 @@ public class MainActivity extends Activity {
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         int id = item.getItemId();
+        Intent intent=null;
         switch (id){
             case R.id.actionbar_search:
-                Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+                intent=new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.actionbar_aboutme:
+                intent=new Intent(MainActivity.this,AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.actionbar_feedback:
+                intent=new Intent(MainActivity.this,AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.actionbar_score:
+                Uri uri = Uri.parse("market://details?id=" + getPackageName());
+                intent = new Intent(Intent.ACTION_VIEW,uri);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
         }

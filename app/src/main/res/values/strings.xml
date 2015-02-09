@@ -3,6 +3,7 @@
 
     <string name="appname">扫扫图书</string>
     <string name="aboutme">关于我</string>
+    <string name="score">给我们评分</string>
     <string name="feedback">意见反馈</string>
     <string name="capture_tip">请将条码置于取景框内扫描</string>
     <string name="title_activity_search">搜索</string>
