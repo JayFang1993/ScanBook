@@ -1,12 +1,14 @@
 package com.scanbook.view.activity;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 
 import com.scanbook.R;
 import com.scanbook.bean.Book;
+import com.scanbook.view.CircularProgressView;
+import com.scanbook.view.MaterialDialog;
 
 /**
  * <a href="http://fangjie.sinaapp.com">http://fangjie.sinaapp.com</a>
@@ -28,6 +32,7 @@ import com.scanbook.bean.Book;
 public class MainActivity extends Activity {
     private TextView tx1;
     private RelativeLayout mRlBtn;
+    private MaterialDialog mMaterialDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,16 +95,40 @@ public class MainActivity extends Activity {
                 startActivity(intent);
                 break;
             case R.id.actionbar_feedback:
-                intent=new Intent(MainActivity.this,AboutActivity.class);
-                startActivity(intent);
+                mMaterialDialog = new MaterialDialog(this);
+                mMaterialDialog.setTitle("MaterialDialog")
+                        .setMessage(
+                                "Hi! This is a MaterialDialog. It's very easy to use, you just new and show() it " +
+                                        "then the beautiful AlertDialog will show automatedly. It is artistic, conforms to Google Material Design." +
+                                        " I hope that you will like it, and enjoy it. ^ ^"
+                        )
+                        .setPositiveButton(
+                                "OK", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        mMaterialDialog.dismiss();
+                                    }
+                                }
+                        )
+                        .setNegativeButton(
+                                "CANCLE", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        mMaterialDialog.dismiss();
+                                    }
+                                }
+                        )
+                        .setCanceledOnTouchOutside(false)
+                        .show();
                 break;
             case R.id.actionbar_score:
-                Uri uri = Uri.parse("market://details?id=" + getPackageName());
-                intent = new Intent(Intent.ACTION_VIEW,uri);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+//                Uri uri = Uri.parse("market://details?id=" + getPackageName());
+//                intent = new Intent(Intent.ACTION_VIEW,uri);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
     }
+
 }

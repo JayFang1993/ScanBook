@@ -16,9 +16,15 @@
  -->
 <resources>
 
+    <color name="material_blue_500">#2196F3</color>
+
     <color name="actionbar">#6295f4</color>
     <color name="rippelColor">#FFFFFF</color>
     <color name="search_item_bg">#cccccc</color>
+    <color name="card_background">#ffffff</color>
+    <color name="card_shadow">#10000000</color>
+    <color name="lite_blue">#ff359ff2</color>
+    <color name="window_background">#00000000</color>
 
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>

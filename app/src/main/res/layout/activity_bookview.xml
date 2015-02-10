@@ -33,7 +33,7 @@
                     android:layout_width="150dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_launcher"
+                    android:src="@drawable/defaultbook"
                     android:scaleType="centerCrop"
                     android:layout_height="220dp" />
                 <LinearLayout

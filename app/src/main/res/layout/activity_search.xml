@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:id="@+id/rl_search"
         android:layout_width="fill_parent"
         android:background="@color/actionbar"
         android:layout_height="50dp">
@@ -33,11 +35,27 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <ListView
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lv_search"
-        android:divider="@null"
-        />
+        android:layout_height="match_parent">
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lv_search"
+            android:divider="@null"
+            />
+        <com.scanbook.view.CircularProgressView
+            android:id="@+id/progress_view"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="0dp"
+            app:cpv_thickness="4dp"
+            app:cpv_indeterminate="true"
+            app:cpv_animAutostart="false"/>
+    </RelativeLayout>
+
 
 </LinearLayout>

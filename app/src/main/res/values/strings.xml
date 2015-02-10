@@ -10,4 +10,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="app_name">MaterialDialog</string>
+    <string name="title_activity_my">MaterialDialog</string>
 </resources>

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,7 @@ import com.scanbook.adapter.SearchAdapter;
 import com.scanbook.bean.Book;
 import com.scanbook.net.BaseAsyncHttp;
 import com.scanbook.net.HttpResponseHandler;
+import com.scanbook.view.CircularProgressView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,11 +37,12 @@ public class SearchActivity extends Activity {
     private List<Book> mBooks=new ArrayList<Book>();
     private EditText mEtContent;
     private ImageView mIvBtn;
+    private CircularProgressView progressView;
+    private Thread updateThread;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
 
         mEtContent=(EditText)findViewById(R.id.et_search_content);
         mIvBtn=(ImageView)findViewById(R.id.iv_search_icon);
@@ -46,10 +50,11 @@ public class SearchActivity extends Activity {
         mIvBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startAnimationThreadStuff(1000);
                 getRequestData(mEtContent.getText().toString());
             }
         });
-
+        progressView = (CircularProgressView) findViewById(R.id.progress_view);
         mAdapter=new SearchAdapter(this,mBooks);
         mLvSearch.setAdapter(mAdapter);
 
@@ -75,6 +80,7 @@ public class SearchActivity extends Activity {
             @Override
             public void jsonSuccess(JSONObject resp) {
                 mBooks.clear();
+                progressView.setVisibility(View.GONE);
                 JSONArray jsonbooks=resp.optJSONArray("books");
                 for (int i=0;i<jsonbooks.length();i++){
                     Book mBook=new Book();
@@ -128,5 +134,34 @@ public class SearchActivity extends Activity {
                 break;
         }
         return true;
+    }
+
+    private void startAnimationThreadStuff(long delay)
+    {
+        if(updateThread != null && updateThread.isAlive())
+            updateThread.interrupt();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                progressView.setVisibility(View.VISIBLE);
+                progressView.setProgress(0f);
+                progressView.startAnimation(); // Alias for resetAnimation, it's all the same
+                updateThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (progressView.getProgress() < progressView.getMaxProgress() && !Thread.interrupted()) {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressView.setProgress(progressView.getProgress() + 10);
+                                }
+                            });
+                            SystemClock.sleep(250);
+                        }
+                    }
+                });
+                updateThread.start();
+            }
+        }, delay);
     }
 }

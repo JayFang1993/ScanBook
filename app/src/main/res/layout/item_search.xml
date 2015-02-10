@@ -13,7 +13,7 @@
         <ImageView
             android:id="@+id/iv_search_icon"
             android:layout_width="100dp"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/defaultbook"
             android:scaleType="centerCrop"
             android:layout_height="fill_parent" />
         <RelativeLayout
