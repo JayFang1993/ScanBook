@@ -149,7 +149,7 @@ public class BookViewActivity extends Activity {
 
             }
         };
-        promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_menu_edit), new OnClickListener() {
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.timeline),new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
@@ -161,7 +161,7 @@ public class BookViewActivity extends Activity {
                 startActivity(intent);
             }
         });
-        promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_menu_send), new OnClickListener() {
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.weixin), new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(BookViewActivity.this,Share2Weibo.class);
@@ -172,7 +172,7 @@ public class BookViewActivity extends Activity {
                 startActivity(intent);
             }
         });
-        promotedActionsLibrary.addItem(getResources().getDrawable(android.R.drawable.ic_input_get), new OnClickListener() {
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.weibo), new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);

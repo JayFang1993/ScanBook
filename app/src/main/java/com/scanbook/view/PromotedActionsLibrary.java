@@ -78,6 +78,7 @@ public class PromotedActionsLibrary {
         return button;
     }
 
+
     public void addItem(Drawable drawable, View.OnClickListener onClickListener) {
 
         ImageButton button = (ImageButton) LayoutInflater.from(context).inflate(R.layout.promoted_action_button, frameLayout, false);
@@ -89,9 +90,24 @@ public class PromotedActionsLibrary {
         promotedActions.add(button);
 
         frameLayout.addView(button);
-
         return;
     }
+
+    public void addItem(Drawable drawable, int background ,View.OnClickListener onClickListener) {
+
+        ImageButton button = (ImageButton) LayoutInflater.from(context).inflate(R.layout.promoted_action_button, frameLayout, false);
+
+        button.setImageDrawable(drawable);
+        button.setBackgroundColor(background);
+
+        button.setOnClickListener(onClickListener);
+
+        promotedActions.add(button);
+
+        frameLayout.addView(button);
+        return;
+    }
+
 
     /**
      * Set close animation for promoted actions
