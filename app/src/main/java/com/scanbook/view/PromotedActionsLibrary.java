@@ -78,6 +78,33 @@ public class PromotedActionsLibrary {
         return button;
     }
 
+    public ImageButton addMainItem(Drawable drawable,int back) {
+
+        ImageButton button = (ImageButton) LayoutInflater.from(context).inflate(R.layout.main_promoted_action_button, frameLayout, false);
+
+        button.setImageDrawable(drawable);
+        button.setBackgroundResource(back);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (isMenuOpened) {
+                    closePromotedActions().start();
+                    isMenuOpened = false;
+                } else {
+                    isMenuOpened = true;
+                    openPromotedActions().start();
+                }
+            }
+        });
+
+        frameLayout.addView(button);
+
+        mainImageButton = button;
+
+        return button;
+    }
 
     public void addItem(Drawable drawable, View.OnClickListener onClickListener) {
 
@@ -93,12 +120,12 @@ public class PromotedActionsLibrary {
         return;
     }
 
-    public void addItem(Drawable drawable, int background ,View.OnClickListener onClickListener) {
+    public void addItem(Drawable drawable, int backimage ,View.OnClickListener onClickListener) {
 
         ImageButton button = (ImageButton) LayoutInflater.from(context).inflate(R.layout.promoted_action_button, frameLayout, false);
 
         button.setImageDrawable(drawable);
-        button.setBackgroundColor(background);
+        button.setBackgroundResource(backimage);
 
         button.setOnClickListener(onClickListener);
 

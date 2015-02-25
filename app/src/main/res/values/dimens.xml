@@ -1,4 +1,5 @@
 <resources>
+    <dimen name="dim48dp">48dp</dimen>
     <dimen name="dim56dp">56dp</dimen>
     <dimen name="dim78dp">78dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->

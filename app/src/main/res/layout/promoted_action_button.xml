@@ -2,10 +2,10 @@
 
 <ImageButton
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dim56dp"
-    android:layout_height="@dimen/dim56dp"
+    android:layout_width="@dimen/dim48dp"
+    android:layout_height="@dimen/dim48dp"
     android:layout_gravity="bottom|right"
-    android:visibility="gone"
+    android:visibility="visible"
     android:background="@drawable/onivas_fab_circle"
     />
 

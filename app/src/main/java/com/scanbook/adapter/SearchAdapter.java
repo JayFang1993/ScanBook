@@ -12,6 +12,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.scanbook.R;
 import com.scanbook.bean.Book;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -51,16 +53,18 @@ public class SearchAdapter extends BaseAdapter {
                 holder.name=(TextView)convertView.findViewById(R.id.tv_search_item_title);
                 holder.author=(TextView)convertView.findViewById(R.id.tv_search_item_author);
                 holder.score=(TextView)convertView.findViewById(R.id.tv_search_item_score);
+                holder.scorenumber=(TextView)convertView.findViewById(R.id.tv_search_item_score_number);
                 convertView.setTag(holder);
             }else{
                 holder = (ViewHolder)convertView.getTag();
             }
             holder.icon=(ImageView)convertView.findViewById(R.id.iv_search_icon);
             holder.name.setText(mlist.get(position).getTitle());
-            holder.author.setText(mlist.get(position).getAuthor());
-            holder.score.setText(mlist.get(position).getRate()+"页");
+            holder.author.setText("作者:"+mlist.get(position).getAuthor()+"/"+mlist.get(position).getPublisher()+"/"+
+                    mlist.get(position).getPublishDate()+"/"+mlist.get(position).getPrice()+"元");
+            holder.score.setText(mlist.get(position).getRate()+"分");
+            holder.scorenumber.setText("("+mlist.get(position).getReviewCount()+"人评论)");
             ImageLoader.getInstance().displayImage(mlist.get(position).getBitmap(),holder.icon);
-
             return convertView;
         }
 
@@ -75,6 +79,7 @@ public class SearchAdapter extends BaseAdapter {
         TextView name;
         TextView author;
         TextView score;
+        TextView scorenumber;
     }
 
 }

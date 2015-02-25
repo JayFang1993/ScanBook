@@ -33,6 +33,8 @@ public class Book implements Parcelable {
     private String Summary;
     //图书图片
     private String Bitmap;
+    //图书评论数量
+    private int ReviewCount;
 
     private String Url;
 
@@ -134,6 +136,14 @@ public class Book implements Parcelable {
         Rate = rate;
     }
 
+    public int getReviewCount() {
+        return ReviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        ReviewCount = reviewCount;
+    }
+
     public static Creator<Book> getCREATOR() {
         return CREATOR;
     }
@@ -176,6 +186,7 @@ public class Book implements Parcelable {
             bookInfo.Tag=source.readString();
             bookInfo.Url=source.readString();
             bookInfo.Content=source.readString();
+            bookInfo.ReviewCount=source.readInt();
             return bookInfo;
         }
         public Book[] newArray(int size) {
@@ -200,9 +211,10 @@ public class Book implements Parcelable {
         dest.writeString(Page);
         dest.writeString(Price);
         dest.writeDouble(Rate);
-        dest.writeString(Url);
         dest.writeString(Tag);
+        dest.writeString(Url);
         dest.writeString(Content);
+        dest.writeInt(ReviewCount);
     }
 
 }

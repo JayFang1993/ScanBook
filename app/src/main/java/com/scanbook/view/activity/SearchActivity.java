@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.loopj.android.http.RequestParams;
 import com.scanbook.R;
@@ -36,21 +39,22 @@ public class SearchActivity extends Activity {
 
     private List<Book> mBooks=new ArrayList<Book>();
     private EditText mEtContent;
-    private ImageView mIvBtn;
     private CircularProgressView progressView;
     private Thread updateThread;
+    private RelativeLayout mRlBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
         mEtContent=(EditText)findViewById(R.id.et_search_content);
-        mIvBtn=(ImageView)findViewById(R.id.iv_search_icon);
         mLvSearch=(ListView)findViewById(R.id.lv_search);
-        mIvBtn.setOnClickListener(new View.OnClickListener() {
+        mRlBtn=(RelativeLayout)findViewById(R.id.rl_search_btn);
+
+        mRlBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startAnimationThreadStuff(1000);
+                startAnimationThreadStuff(100);
                 getRequestData(mEtContent.getText().toString());
             }
         });
@@ -69,6 +73,24 @@ public class SearchActivity extends Activity {
             }
         });
 
+        mEtContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.toString().equals("")){
+                    mRlBtn.setVisibility(View.GONE);
+                }else{
+                    mRlBtn.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
 
@@ -86,6 +108,7 @@ public class SearchActivity extends Activity {
                     Book mBook=new Book();
                     mBook.setId(jsonbooks.optJSONObject(i).optString("id"));
                     mBook.setRate(jsonbooks.optJSONObject(i).optJSONObject("rating").optDouble("average"));
+                    mBook.setReviewCount(jsonbooks.optJSONObject(i).optJSONObject("rating").optInt("numRaters"));
                     String authors="";
                     for (int j=0;j<jsonbooks.optJSONObject(i).optJSONArray("author").length();j++){
                         authors=authors+" "+jsonbooks.optJSONObject(i).optJSONArray("author").optString(j);

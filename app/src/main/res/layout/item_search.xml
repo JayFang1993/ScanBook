@@ -7,7 +7,10 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:background="@drawable/corners"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         android:layout_height="fill_parent">
         <ImageView
@@ -23,19 +26,42 @@
             <TextView
                 android:id="@+id/tv_search_item_title"
                 android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginTop="3dp"
+                android:maxLines="2"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/contents_text"
                 android:text="盗墓笔记"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_search_item_author"
+                android:maxLines="2"
                 android:layout_width="fill_parent"
+                android:textSize="12sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/search_item_bg"
                 android:layout_below="@id/tv_search_item_title"
                 android:text="南派三叔 / 中国友谊出版公司 / 2007-1 / 26.80元"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_alignParentBottom="true"
+                android:layout_marginBottom="3dp"
                 android:id="@+id/tv_search_item_score"
+                android:layout_width="wrap_content"
+                android:textSize="12sp"
+                android:text="8.2分"
+                android:textColor="@color/viewfinder_laser"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/search_item_bg"
+                android:layout_toRightOf="@id/tv_search_item_score"
+                android:id="@+id/tv_search_item_score_number"
                 android:layout_width="fill_parent"
-                android:text="8.2 (897人评价)"
+                android:text="(897人评价)"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
     </LinearLayout>

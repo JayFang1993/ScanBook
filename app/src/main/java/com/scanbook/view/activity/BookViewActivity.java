@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class BookViewActivity extends Activity {
     private Book mBook;
 
     private RelativeLayout mRlAnnotation;
+    private LinearLayout mLlIntro,mLlMulu;
     private String isbn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +64,14 @@ public class BookViewActivity extends Activity {
         mRlAnnotation.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Handler().postDelayed(new Runnable(){
-                    public void run() {
-                        Intent intent=new Intent(BookViewActivity.this,AnnotationListActivity.class);
-                        intent.putExtra("id",mBook.getId());
-                        startActivity(intent);
-                    }
-                }, 1000);
-
+            new Handler().postDelayed(new Runnable(){
+                public void run() {
+                    Intent intent=new Intent(BookViewActivity.this,AnnotationListActivity.class);
+                    intent.putExtra("id",mBook.getId());
+                    intent.putExtra("name",mBook.getTitle());
+                    startActivity(intent);
+                }
+            }, 800);
             }
         });
 
@@ -87,6 +89,8 @@ public class BookViewActivity extends Activity {
         mIvIcon=(ImageView)findViewById(R.id.iv_book_icon);
         mTvSummary=(TextView)findViewById(R.id.tv_book_intro_content);
         mTvContent=(TextView)findViewById(R.id.tv_book_mulu_content);
+        mLlIntro=(LinearLayout)findViewById(R.id.ll_book_intro);
+        mLlMulu=(LinearLayout)findViewById(R.id.ll_book_mulu);
     }
 
     public void getRequestData(String isbn){
@@ -97,6 +101,7 @@ public class BookViewActivity extends Activity {
                 mBook=new Book();
                 mBook.setId(resp.optString("id"));
                 mBook.setRate(resp.optJSONObject("rating").optDouble("average"));
+                mBook.setReviewCount(resp.optJSONObject("rating").optInt("numRaters"));
                 String authors="";
                 for (int j=0;j<resp.optJSONArray("author").length();j++){
                     authors=authors+" "+resp.optJSONArray("author").optString(j);
@@ -125,31 +130,49 @@ public class BookViewActivity extends Activity {
     }
 
     private void updateToView(){
-        mTvAuthor.setText(mBook.getAuthor());
+        mTvAuthor.setText(mBook.getAuthor().trim());
         mTvPublisher.setText(mBook.getPublisher());
         mTvDate.setText(mBook.getPublishDate());
         mTvIsbn.setText(mBook.getISBN());
         mTvRate.setText(mBook.getRate()+"分");
         mTvPrice.setText(mBook.getPrice());
-        mTvPage.setText(mBook.getPage());
-        mTvSummary.setText(mBook.getSummary());
-        mTvContent.setText(mBook.getContent());
-        mTvtags.setText(mBook.getTag());
+        mTvPage.setText(mBook.getPage()+"页");
+        if(mBook.getSummary().trim().equals(""))
+            mLlIntro.setVisibility(View.GONE);
+        else
+            mTvSummary.setText(mBook.getSummary());
+        if(mBook.getContent().trim().equals(""))
+            mLlMulu.setVisibility(View.GONE);
+        else
+            mTvContent.setText(mBook.getContent());
+        mTvtags.setText(mBook.getTag().equals("")?"无标签":mBook.getTag());
         ImageLoader.getInstance().displayImage(mBook.getBitmap(),mIvIcon);
+
+        this.getActionBar().setTitle(mBook.getTitle());
     }
 
     private void initBtn(){
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.container);
         PromotedActionsLibrary promotedActionsLibrary = new PromotedActionsLibrary();
         promotedActionsLibrary.setup(getApplicationContext(), frameLayout);
-
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         };
-        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.timeline),new OnClickListener() {
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.weibo),R.drawable.weibo_back,new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(BookViewActivity.this,Share2Weibo.class);
+                intent.putExtra("url",mBook.getUrl());
+                intent.putExtra("score",mBook.getRate()+"");
+                intent.putExtra("picurl",mBook.getBitmap());
+                intent.putExtra("name",mBook.getTitle());
+                startActivity(intent);
+            }
+        });
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.weixin),R.drawable.weixin_back, new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
@@ -161,18 +184,8 @@ public class BookViewActivity extends Activity {
                 startActivity(intent);
             }
         });
-        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.weixin), new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(BookViewActivity.this,Share2Weibo.class);
-                intent.putExtra("url",mBook.getUrl());
-                intent.putExtra("score",mBook.getRate()+"");
-                intent.putExtra("picurl",mBook.getBitmap());
-                intent.putExtra("name",mBook.getTitle());
-                startActivity(intent);
-            }
-        });
-        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.weibo), new OnClickListener() {
+
+        promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.timeline),R.drawable.timeline_back,new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
@@ -184,7 +197,7 @@ public class BookViewActivity extends Activity {
                 startActivity(intent);
             }
         });
-        promotedActionsLibrary.addMainItem(getResources().getDrawable(android.R.drawable.ic_input_add));
+        promotedActionsLibrary.addMainItem(getResources().getDrawable(R.drawable.share),R.drawable.btn_back);
     }
 
     @Override

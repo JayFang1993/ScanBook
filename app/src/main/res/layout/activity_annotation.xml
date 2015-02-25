@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main_layout"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/search_item_bg"
 	>
     <ListView
         android:id="@+id/lv_annotation"

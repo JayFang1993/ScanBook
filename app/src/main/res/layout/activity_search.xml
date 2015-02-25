@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -30,11 +31,29 @@
                 android:layout_marginLeft="10dp"
                 android:singleLine="true"
                 android:background="@null"
+                android:hint="请输入书名"
                 android:layout_toRightOf="@+id/iv_search_icon"
                 android:layout_height="fill_parent" />
+            <com.scanbook.view.RippleView
+                android:id="@+id/rl_search_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                ripple:rv_centered="true">
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:text="搜索"
+                    android:textSize="18sp"
+                    android:background="@color/actionbar"
+                    android:textColor="@color/white"
+                    />
+            </com.scanbook.view.RippleView>
         </RelativeLayout>
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent">

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.scanbook.R;
@@ -36,7 +37,7 @@ public class AnnotationListActivity extends Activity{
     private ListView mLvAnnotation;
     private List<Annotation> mAnnotations=new ArrayList<Annotation>();
     private AnnotationAdapter mAdapter;
-    private String bookid;
+    private String bookid,bookname;
 
     private int hasNum=0; //已经加载的数量
 
@@ -45,6 +46,9 @@ public class AnnotationListActivity extends Activity{
 		setContentView(R.layout.activity_annotation);
 
         bookid=getIntent().getStringExtra("id");
+        bookname=getIntent().getStringExtra("name");
+        this.getActionBar().setTitle("《"+bookname+"》的笔记");
+
         RequestParams params=new RequestParams();
         BaseAsyncHttp.getReq("/v2/book/" + bookid + "/annotations", params, new HttpResponseHandler() {
             @Override
@@ -62,7 +66,10 @@ public class AnnotationListActivity extends Activity{
                     annotation.setTime(jsons.optJSONObject(i).optString("time"));
                     mAnnotations.add(annotation);
                 }
-
+                if(mAnnotations.size()==0) {
+                    Toast.makeText(AnnotationListActivity.this,"没有发现本书的读书笔记",Toast.LENGTH_SHORT).show();
+                    AnnotationListActivity.this.finish();
+                }
                 mAdapter=new AnnotationAdapter(AnnotationListActivity.this,mAnnotations);
                 mLvAnnotation.setAdapter(mAdapter);
             }
