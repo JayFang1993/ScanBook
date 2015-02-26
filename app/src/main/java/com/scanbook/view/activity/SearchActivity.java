@@ -22,6 +22,7 @@ import com.loopj.android.http.RequestParams;
 import com.scanbook.R;
 import com.scanbook.adapter.SearchAdapter;
 import com.scanbook.bean.Book;
+import com.scanbook.common.KeyboardUtils;
 import com.scanbook.net.BaseAsyncHttp;
 import com.scanbook.net.HttpResponseHandler;
 import com.scanbook.view.CircularProgressView;
@@ -55,6 +56,7 @@ public class SearchActivity extends Activity {
             @Override
             public void onClick(View view) {
                 startAnimationThreadStuff(100);
+                KeyboardUtils.closeKeyBoard(SearchActivity.this);
                 getRequestData(mEtContent.getText().toString());
             }
         });

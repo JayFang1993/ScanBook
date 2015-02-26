@@ -5,6 +5,8 @@
     android:layout_width="@dimen/dim48dp"
     android:layout_height="@dimen/dim48dp"
     android:layout_gravity="bottom|right"
+    android:layout_marginRight="3dp"
+    android:layout_marginBottom="3dp"
     android:visibility="visible"
     android:background="@drawable/onivas_fab_circle"
     />

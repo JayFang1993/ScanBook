@@ -176,6 +176,7 @@ public class BookViewActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
+                BaseAsyncHttp.downloadFile(mBook.getBitmap());
                 intent.putExtra("url",mBook.getUrl());
                 intent.putExtra("score",mBook.getRate()+"");
                 intent.putExtra("picurl",mBook.getBitmap());
@@ -189,6 +190,7 @@ public class BookViewActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
+                BaseAsyncHttp.downloadFile(mBook.getBitmap());
                 intent.putExtra("url",mBook.getUrl());
                 intent.putExtra("score",mBook.getRate()+"");
                 intent.putExtra("picurl",mBook.getBitmap());

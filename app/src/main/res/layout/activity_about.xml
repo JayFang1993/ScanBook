@@ -3,26 +3,118 @@
     android:layout_width="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="@color/search_item_bg"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/ic_launcher"
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:layout_width="wrap_content"
-        android:text="扫扫图书"
+        android:text="扫扫图书 2.0"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="Version 1.0"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="By:Jay.Fang"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content" />
+
+    
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:id="@+id/rl_about_author"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="作者：Jay.Fang"
+            android:layout_marginLeft="18dp"
+            android:textColor="@color/help_view"
+            android:layout_height="wrap_content" />
+         <ImageView
+             android:layout_width="wrap_content"
+             android:src="@drawable/arrow"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:background="@color/search_item_bg"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:id="@+id/rl_about_blog"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="博客：http://fangjie.info"
+            android:textColor="@color/help_view"
+            android:layout_marginLeft="18dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:background="@color/search_item_bg"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:id="@+id/rl_about_pro"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="项目地址：http://github.com/JayFang1993/ScanBook"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/help_view"
+            android:maxLines="1"
+            android:layout_marginLeft="18dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:background="@color/search_item_bg"
+        android:layout_height="1dp" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:id="@+id/rl_about_update"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="版本更新"
+            android:textColor="@color/help_view"
+            android:layout_marginLeft="18dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_about_version"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/help_view"
+            android:layout_marginRight="25dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/arrow"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 </LinearLayout>

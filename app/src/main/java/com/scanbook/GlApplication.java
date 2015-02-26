@@ -13,7 +13,7 @@ import com.scanbook.common.FileUtils;
 import com.tencent.mm.sdk.platformtools.Util;
 
 import java.io.File;
-
+import mp.dt.c;
 /**
  * Created by Jim on 2015/2/3.
  */
@@ -22,7 +22,7 @@ public class GlApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initImageLoad(getApplicationContext());
-
+        c.i(getApplicationContext());
     }
 
     public static void initImageLoad(Context context){

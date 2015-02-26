@@ -184,9 +184,9 @@ public class Book implements Parcelable {
             bookInfo.Price=source.readString();;
             bookInfo.Rate=source.readDouble();
             bookInfo.Tag=source.readString();
-            bookInfo.Url=source.readString();
             bookInfo.Content=source.readString();
             bookInfo.ReviewCount=source.readInt();
+            bookInfo.Url=source.readString();
             return bookInfo;
         }
         public Book[] newArray(int size) {
@@ -212,9 +212,9 @@ public class Book implements Parcelable {
         dest.writeString(Price);
         dest.writeDouble(Rate);
         dest.writeString(Tag);
-        dest.writeString(Url);
         dest.writeString(Content);
         dest.writeInt(ReviewCount);
+        dest.writeString(Url);
     }
 
 }

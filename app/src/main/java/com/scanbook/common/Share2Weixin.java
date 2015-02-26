@@ -46,6 +46,8 @@ public class Share2Weixin extends Activity{
         WXAPI.registerApp(Constant.AppID);
 
         WXWebpageObject webpage = new WXWebpageObject();
+        if(url.equals(""))
+            url="http://book.douban.com";
         webpage.webpageUrl =url;
         WXMediaMessage msg = new WXMediaMessage(webpage);
         if(type==TIMELINE){
@@ -55,10 +57,15 @@ public class Share2Weixin extends Activity{
             msg.title =name;
             msg.description ="我在@扫扫图书 发现了一本不错的书，《"+name+"》豆瓣评分:"+score+"分";
         }
-        Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-        Log.i("fangjie","url:"+picurl);
-        //Bitmap thumb =ImageLoader.getInstance().loadImageSync(picurl);
-        msg.thumbData = Util.bmpToByteArray(thumb, true);
+        String tempPath = FileUtils.getCachePath() + "/temp.jpg";
+        File f= new File(tempPath);
+        if(f.exists()){
+            Bitmap thumb=BitmapFactory.decodeFile(tempPath);
+            msg.thumbData = Util.bmpToByteArray(thumb, true);
+        }else{
+            Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+            msg.thumbData = Util.bmpToByteArray(thumb, true);
+        }
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction ="";
         req.message = msg;

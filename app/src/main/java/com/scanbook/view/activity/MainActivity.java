@@ -21,6 +21,13 @@ import com.scanbook.R;
 import com.scanbook.bean.Book;
 import com.scanbook.view.CircularProgressView;
 import com.scanbook.view.MaterialDialog;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
+
+import mp.dt.c;
 
 /**
  * <a href="http://fangjie.sinaapp.com">http://fangjie.sinaapp.com</a>
@@ -37,6 +44,44 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //友盟自动更新
+        UmengUpdateAgent.setUpdateAutoPopup(false);
+        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+            @Override
+            public void onUpdateReturned(int updateStatus,final UpdateResponse updateInfo) {
+                switch (updateStatus) {
+                    case UpdateStatus.Yes: // has update
+                        //UmengUpdateAgent.showUpdateDialog(MainActivity.this, updateInfo);
+                        mMaterialDialog = new MaterialDialog(MainActivity.this);
+                        mMaterialDialog.setTitle("扫扫图书"+updateInfo.version)
+                                .setMessage(updateInfo.updateLog)
+                                .setPositiveButton(
+                                        "立即更新", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                UmengUpdateAgent.startDownload(MainActivity.this,updateInfo);
+                                                mMaterialDialog.dismiss();
+                                            }
+                                        }
+                                )
+                                .setNegativeButton(
+                                        "稍后更新", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                mMaterialDialog.dismiss();
+                                            }
+                                        }
+                                )
+                                .setCanceledOnTouchOutside(false)
+                                .show();
+                        break;
+                }
+            }
+        });
+        UmengUpdateAgent.update(this);
+        //广告sdk
+        c.s(getApplicationContext(), "1054-3-7151");
 
         //设置初始界面的显示
         StringBuffer str=new StringBuffer();
@@ -96,39 +141,46 @@ public class MainActivity extends Activity {
                 break;
             case R.id.actionbar_feedback:
                 mMaterialDialog = new MaterialDialog(this);
-                mMaterialDialog.setTitle("MaterialDialog")
+                mMaterialDialog.setTitle("感谢建议")
                         .setMessage(
-                                "Hi! This is a MaterialDialog. It's very easy to use, you just new and show() it " +
-                                        "then the beautiful AlertDialog will show automatedly. It is artistic, conforms to Google Material Design." +
-                                        " I hope that you will like it, and enjoy it. ^ ^"
+                                "你可以给我邮件 JayFang1993@gmail.com，或者微博：@方杰_Jay，感谢你的反馈 ^ ^"
                         )
                         .setPositiveButton(
-                                "OK", new View.OnClickListener() {
+                                "关注我", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         mMaterialDialog.dismiss();
                                     }
                                 }
-                        )
-                        .setNegativeButton(
-                                "CANCLE", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        mMaterialDialog.dismiss();
-                                    }
+                        ).setNegativeButton("取消",new View.OnClickListener(){
+                                @Override
+                                public void onClick(View view) {
+                                    mMaterialDialog.dismiss();
                                 }
-                        )
+                            })
                         .setCanceledOnTouchOutside(false)
                         .show();
                 break;
             case R.id.actionbar_score:
-//                Uri uri = Uri.parse("market://details?id=" + getPackageName());
-//                intent = new Intent(Intent.ACTION_VIEW,uri);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intent);
+                Uri uri = Uri.parse("market://details?id="+"com.scanbook");
+                intent = new Intent(Intent.ACTION_VIEW,uri);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

@@ -22,6 +22,9 @@ import com.sina.weibo.sdk.api.share.SendMultiMessageToWeiboRequest;
 import com.sina.weibo.sdk.api.share.WeiboShareSDK;
 import com.sina.weibo.sdk.constant.WBConstants;
 import com.sina.weibo.sdk.utils.Utility;
+import com.tencent.mm.sdk.platformtools.Util;
+
+import java.io.File;
 
 /**
  * Created by Jay on 15/2/4.
@@ -38,7 +41,6 @@ public class Share2Weibo extends Activity implements IWeiboHandler.Response {
         String picurl=getIntent().getStringExtra("picurl");
         String score=getIntent().getStringExtra("score");
 
-        Log.i("fangjie",name);
         mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(this, Constant.APP_KEY);
         mWeiboShareAPI.registerApp();
 
@@ -65,10 +67,16 @@ public class Share2Weibo extends Activity implements IWeiboHandler.Response {
 
     private ImageObject getImageObj(String picurl) {
         ImageObject imageObject = new ImageObject();
-        //Bitmap bm=ImageLoader.getInstance().getMemoryCache().get(picurl);b
-        Bitmap bm=BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-        Log.i("fangjie",bm.toString());
-        imageObject.setImageObject(bm);
+
+        String tempPath = FileUtils.getCachePath() + "/temp.jpg";
+        File f= new File(tempPath);
+        if(f.exists()){
+            Bitmap thumb=BitmapFactory.decodeFile(tempPath);
+            imageObject.setImageObject(thumb);
+        }else{
+            Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+            imageObject.setImageObject(thumb);
+        }
         return imageObject;
     }
 

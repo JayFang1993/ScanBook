@@ -41,6 +41,14 @@ public class AnnotationAdapter extends BaseAdapter {
             return 0;
         }
 
+        public void setList(List<Annotation> m){
+            this.mList=m;
+        }
+
+        public void clear(){
+            mList.clear();
+        }
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder=null;

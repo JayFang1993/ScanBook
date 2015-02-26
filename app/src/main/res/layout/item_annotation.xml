@@ -39,43 +39,49 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:text="2014-10-2"
-                android:layout_height="wrap_content" />
-            <ImageView
-                android:layout_width="20dp"
-                android:src="@drawable/chapter"
-                android:layout_toRightOf="@id/iv_annotation_head_icon"
-                android:layout_below="@id/tv_annotation_user"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="20dp" />
-            <TextView
-                android:id="@+id/tv_annotation_cheapter"
-                android:layout_toRightOf="@id/iv_annotation_head_icon"
-                android:layout_below="@id/tv_annotation_user"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:text="一个人要像一支队伍"
+                android:textColor="@color/help_view"
                 android:layout_height="wrap_content" />
 
+
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/tv_annotation_cheapter"
+                android:layout_toRightOf="@id/iv_annotation_head_icon"
                 android:layout_below="@id/tv_annotation_user"
                 android:src="@drawable/location"/>
             <TextView
                 android:id="@+id/tv_annotation_page"
-                android:layout_toRightOf="@id/tv_annotation_cheapter"
+                android:layout_below="@id/tv_annotation_user"
+                android:layout_toRightOf="@id/iv_annotation_head_icon"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/help_view"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:text="194页"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:src="@drawable/chapter"
+                android:layout_toRightOf="@id/tv_annotation_page"
+                android:layout_below="@id/tv_annotation_user"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="16dp" />
+            <TextView
+                android:id="@+id/tv_annotation_cheapter"
+                android:layout_toRightOf="@id/tv_annotation_page"
                 android:layout_below="@id/tv_annotation_user"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
+                android:textColor="@color/help_view"
+                android:maxLines="1"
                 android:layout_width="wrap_content"
-                android:text="194页"
+                android:text="一个人要像一支队伍"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <TextView
