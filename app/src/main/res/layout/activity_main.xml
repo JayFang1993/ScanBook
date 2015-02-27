@@ -1,53 +1,73 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:textColor="#000000"
-    android:baselineAligned="false"
-    android:background="@color/white"
-    android:gravity="center_horizontal">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="使用说明"
-        android:textColor="#0600ff"
-        android:layout_marginTop="10dp"
-        android:textSize="30sp"
-        android:textIsSelectable="true"/>
-    <TextView
-        android:layout_height="wrap_content"
+    <ImageView
         android:layout_width="fill_parent"
-        android:id="@+id/main_textview01"
-        android:paddingRight="30dp"
-        android:paddingLeft="30dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
-
-
-    <com.scanbook.view.RippleView
-        android:id="@+id/rl_scan"
+        android:src="@drawable/main_back"
+        android:layout_above="@+id/main_btns"
+        android:scaleType="centerCrop"
+        android:layout_height="match_parent">
+    </ImageView>
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_height="50dp"
-        ripple:rv_centered="true">
+        android:layout_alignParentBottom="true"
+        android:id="@id/main_btns"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_height="120dp">
+        <com.scanbook.view.RippleView
+            android:id="@+id/rl_scan"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            ripple:rv_centered="true">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:text="扫描"
+                android:textSize="18sp"
+                android:background="@color/white"
+                android:textColor="@color/gray"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@drawable/scan"
+                android:layout_marginTop="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
+        </com.scanbook.view.RippleView>
+        <ImageView
+            android:layout_width="1px"
+            android:src="@color/gray"
+            android:layout_height="fill_parent" />
+        <com.scanbook.view.RippleView
+            android:id="@+id/rl_search"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            ripple:rv_centered="true">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:text="搜索"
+                android:layout_centerHorizontal="true"
+                android:textSize="18sp"
+                android:background="@color/white"
+                android:textColor="@color/gray"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@drawable/search_black"
+                android:layout_marginTop="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
+        </com.scanbook.view.RippleView>
+    </LinearLayout>
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:text="开始扫描ISBN"
-            android:textSize="18sp"
-            android:background="@color/actionbar"
-            android:textColor="@color/white"
-           />
 
-    </com.scanbook.view.RippleView>
-
-
-</LinearLayout>
+</RelativeLayout>

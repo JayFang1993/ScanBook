@@ -88,8 +88,8 @@ public class MainActivity extends Activity {
         str.append("1.按下扫描按钮启动摄像头，扫描并获取书籍的条形码；").append("\n");
         str.append("2.查询书籍相关介绍信息；").append("\n");
         str.append("3.显示在界面上").append("\n");
-        tx1=(TextView)findViewById(R.id.main_textview01);
-        tx1.setText(str.toString());
+//        tx1=(TextView)findViewById(R.id.main_textview01);
+//        tx1.setText(str.toString());
         mRlBtn=(RelativeLayout)findViewById(R.id.rl_scan);
 
         

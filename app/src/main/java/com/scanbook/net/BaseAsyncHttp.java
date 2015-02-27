@@ -57,7 +57,6 @@ public class BaseAsyncHttp extends AsyncHttpClient {
                                   byte[] binaryData) {
                 String tempPath = FileUtils.getCachePath() + "/temp.jpg";
                 Bitmap bmp = BitmapFactory.decodeByteArray(binaryData, 0, binaryData.length);
-
                 File file = new File(tempPath);
                 // 压缩格式
                 Bitmap.CompressFormat format = Bitmap.CompressFormat.JPEG;

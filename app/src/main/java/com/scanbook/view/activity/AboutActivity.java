@@ -41,10 +41,10 @@ public class AboutActivity extends Activity {
                 mMaterialDialog = new MaterialDialog(AboutActivity.this);
                 mMaterialDialog.setTitle("关于作者")
                         .setMessage(
-                                "南昌大学计算机软件专业大四在读，华中科技大学准硕士生。" +
-                                        "90后，伪文艺青年，Android开发者。有自己的个性，" +
-                                        "不喜欢被条条框框束缚。虽为一介屌丝，却有一颗顽强、" +
-                                        "上进的心，不屈服，不放弃。热爱互联网。^ ^"
+                                "花名：Jay.Fang\n" +
+                                        "博客：http://fangjie.info\n" +
+                                        "Weibo：@方杰_Jay\n" +
+                                        "Email：JayFang1993#gmail\n"
                         )
                         .setPositiveButton(
                                 "去TA博客", new View.OnClickListener() {

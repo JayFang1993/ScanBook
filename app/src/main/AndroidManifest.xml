@@ -35,10 +35,6 @@
         <activity
             android:name=".view.activity.MainActivity"
             android:label="@string/appname" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.BookViewActivity"
@@ -66,8 +62,22 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:theme="@style/CustomActionBarThemeBack"
+            android:label="@string/appname" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.scanbook.view.activity.GuidePageActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity android:name="com.scanbook.view.activity.AboutActivity"
             android:configChanges="keyboardHidden|orientation"
+            android:label="@string/aboutme"
             android:theme="@style/CustomActionBarThemeBack"
             android:screenOrientation="portrait" >
         </activity>
@@ -76,8 +86,6 @@
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" /> </intent-filter>
         </activity>
-
-
 
         <activity android:name="mp.dt.aytp"
             android:theme="@android:style/Theme.Translucent" />
@@ -97,7 +105,6 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-
 
         <service
             android:name="com.umeng.update.net.DownloadingService"

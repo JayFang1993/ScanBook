@@ -6,14 +6,15 @@
     android:background="@color/search_item_bg"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:src="@drawable/ic_launcher"
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:text="扫扫图书 2.0"
+        android:textSize="18sp"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content" />
 
@@ -27,21 +28,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:text="作者：Jay.Fang"
+            android:text="作者"
+            android:textSize="15sp"
             android:layout_marginLeft="18dp"
-            android:textColor="@color/help_view"
             android:layout_height="wrap_content" />
          <ImageView
              android:layout_width="wrap_content"
              android:src="@drawable/arrow"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
-             android:layout_height="wrap_content" />
+             android:layout_height="15dp" />
     </RelativeLayout>
     <ImageView
         android:layout_width="fill_parent"
-        android:background="@color/search_item_bg"
-        android:layout_height="1dp" />
+        android:background="@color/gray"
+        android:layout_height="1px" />
     <RelativeLayout
         android:layout_width="fill_parent"
         android:background="@color/white"
@@ -50,8 +51,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
+            android:textSize="15sp"
             android:text="博客：http://fangjie.info"
-            android:textColor="@color/help_view"
             android:layout_marginLeft="18dp"
             android:layout_height="wrap_content" />
         <ImageView
@@ -59,12 +60,12 @@
             android:src="@drawable/arrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content" />
+            android:layout_height="15dp" />
     </RelativeLayout>
     <ImageView
         android:layout_width="fill_parent"
-        android:background="@color/search_item_bg"
-        android:layout_height="1dp" />
+        android:background="@color/gray"
+        android:layout_height="1px" />
     <RelativeLayout
         android:layout_width="fill_parent"
         android:background="@color/white"
@@ -73,9 +74,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:text="项目地址：http://github.com/JayFang1993/ScanBook"
+            android:text="项目地址"
             android:layout_marginRight="10dp"
-            android:textColor="@color/help_view"
+            android:textSize="15sp"
             android:maxLines="1"
             android:layout_marginLeft="18dp"
             android:layout_height="wrap_content" />
@@ -84,12 +85,12 @@
             android:src="@drawable/arrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content" />
+            android:layout_height="15dp" />
     </RelativeLayout>
     <ImageView
         android:layout_width="fill_parent"
-        android:background="@color/search_item_bg"
-        android:layout_height="1dp" />
+        android:background="@color/gray"
+        android:layout_height="1px" />
     <RelativeLayout
         android:layout_width="fill_parent"
         android:background="@color/white"
@@ -98,8 +99,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
+            android:textSize="15sp"
             android:text="版本更新"
-            android:textColor="@color/help_view"
             android:layout_marginLeft="18dp"
             android:layout_height="wrap_content" />
         <TextView
@@ -107,14 +108,14 @@
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:textColor="@color/help_view"
             android:layout_marginRight="25dp"
+            android:textSize="15sp"
             android:layout_height="wrap_content" />
         <ImageView
             android:layout_width="wrap_content"
             android:src="@drawable/arrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content" />
+            android:layout_height="15dp" />
     </RelativeLayout>
 </LinearLayout>

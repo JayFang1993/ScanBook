@@ -122,17 +122,18 @@ public class AnnotationListActivity extends Activity{
                     annotation.setTime(jsons.optJSONObject(i).optString("time"));
                     mAnnotations.add(annotation);
                 }
-                mAdapter.setList(mAnnotations);
-                mAdapter.notifyDataSetChanged();
-                if(hasNum==resp.optInt("total"))
-                    Toast.makeText(AnnotationListActivity.this,"没有更多的读书笔记",Toast.LENGTH_SHORT).show();
-
-                hasNum = mAnnotations.size();
-                mSrLayout.setRefreshing(false);
                 if(mAnnotations.size()==0) {
                     Toast.makeText(AnnotationListActivity.this,"没有发现本书的读书笔记",Toast.LENGTH_SHORT).show();
                     AnnotationListActivity.this.finish();
                 }
+
+                mAdapter.setList(mAnnotations);
+                mAdapter.notifyDataSetChanged();
+                if(hasNum==resp.optInt("total"))
+                    Toast.makeText(AnnotationListActivity.this,"没有更多的读书笔记",Toast.LENGTH_SHORT).show();
+                hasNum = mAnnotations.size();
+                mSrLayout.setRefreshing(false);
+
             }
         });
     }
