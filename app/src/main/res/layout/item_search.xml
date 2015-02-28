@@ -26,7 +26,7 @@
             <TextView
                 android:id="@+id/tv_search_item_title"
                 android:layout_width="wrap_content"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:layout_marginTop="3dp"
                 android:maxLines="2"
                 android:layout_alignParentTop="true"
@@ -41,6 +41,7 @@
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
                 android:textColor="@color/gray"
+                android:paddingTop="15dp"
                 android:text="南派三叔 / 中国友谊出版公司 / 2007-1 / 26.80元"
                 android:layout_height="wrap_content" />
             <TextView

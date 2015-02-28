@@ -50,7 +50,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/people"
+                        android:src="@drawable/author"
                         />
                     <ImageView
                         android:id="@+id/iv_book_time"
