@@ -41,9 +41,11 @@ public class GuidePageActivity extends FragmentActivity {
         Fragment pag1= new GuidePageFragment(1);
         Fragment pag2= new GuidePageFragment(2);
         Fragment pag3= new GuidePageFragment(3);
+        Fragment pag4= new GuidePageFragment(4);
         mFgPages.add(pag1);
         mFgPages.add(pag2);
         mFgPages.add(pag3);
+        mFgPages.add(pag4);
 
         mVp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), mFgPages));
         mVp.setCurrentItem(0);
@@ -88,8 +90,10 @@ public class GuidePageActivity extends FragmentActivity {
                 mRl.setBackgroundResource(R.drawable.page1);
             }else if(index==2){
                 mRl.setBackgroundResource(R.drawable.page2);
-            }else{
+            }else if(index==3){
                 mRl.setBackgroundResource(R.drawable.page3);
+            }else{
+                mRl.setBackgroundResource(R.drawable.page4);
                 btn.setVisibility(View.VISIBLE);
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override

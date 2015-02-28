@@ -47,50 +47,8 @@ public class BaseAsyncHttp extends AsyncHttpClient {
         new AsyncHttpClient().get(HOST + url, params, hander);
     }
 
-    public static void downloadFile(String url){
+    public static void downloadFile(String url,FileDownloadHandler handler){
         AsyncHttpClient client = new AsyncHttpClient();
-        String[] allowedContentTypes = new String[]{"image/png", "image/jpeg"};
-        client.get(url, new BinaryHttpResponseHandler(allowedContentTypes) {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers,
-                                  byte[] binaryData) {
-                String tempPath = FileUtils.getCachePath() + "/temp.jpg";
-                Bitmap bmp = BitmapFactory.decodeByteArray(binaryData, 0, binaryData.length);
-                File file = new File(tempPath);
-                // 压缩格式
-                Bitmap.CompressFormat format = Bitmap.CompressFormat.JPEG;
-                // 压缩比例
-                int quality = 100;
-                try {
-                    if (file.exists())
-                        file.delete();
-                    file.createNewFile();
-                    OutputStream stream = new FileOutputStream(file);
-                    bmp.compress(format, quality, stream);
-                    stream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers,
-                                  byte[] binaryData, Throwable error) {
-            }
-
-            @Override
-            public void onProgress(int bytesWritten, int totalSize) {
-                super.onProgress(bytesWritten, totalSize);
-                int count = (int) ((bytesWritten * 1.0 / totalSize) * 100);
-            }
-
-            @Override
-            public void onRetry(int retryNo) {
-                super.onRetry(retryNo);
-            }
-
-        });
-
+        client.get(url,handler);
     }
 }

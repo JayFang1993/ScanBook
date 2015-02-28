@@ -1,18 +1,25 @@
 package com.scanbook.view.activity;
+import com.loopj.android.http.BinaryHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.scanbook.R;
 import com.scanbook.bean.Book;
+import com.scanbook.common.FileUtils;
 import com.scanbook.common.Share2Weibo;
 import com.scanbook.common.Share2Weixin;
 import com.scanbook.net.BaseAsyncHttp;
+import com.scanbook.net.FileDownloadHandler;
 import com.scanbook.net.HttpResponseHandler;
+import com.scanbook.view.CircularProgressView;
 import com.scanbook.view.PromotedActionsLibrary;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,8 +31,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.apache.http.Header;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * <a href="http://fangjie.sinaapp.com">http://fangjie.sinaapp.com</a>
@@ -45,6 +59,9 @@ public class BookViewActivity extends Activity {
     private RelativeLayout mRlAnnotation;
     private LinearLayout mLlIntro,mLlMulu;
     private String isbn;
+
+    private CircularProgressView progressView;
+    private Thread updateThread;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,20 +81,22 @@ public class BookViewActivity extends Activity {
         mRlAnnotation.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-            new Handler().postDelayed(new Runnable(){
-                public void run() {
-                    Intent intent=new Intent(BookViewActivity.this,AnnotationListActivity.class);
-                    intent.putExtra("id",mBook.getId());
-                    intent.putExtra("name",mBook.getTitle());
-                    startActivity(intent);
-                }
-            }, 800);
+                new Handler().postDelayed(new Runnable(){
+                    public void run() {
+                        Intent intent=new Intent(BookViewActivity.this,AnnotationListActivity.class);
+                        intent.putExtra("id",mBook.getId());
+                        intent.putExtra("name",mBook.getTitle());
+                        startActivity(intent);
+                    }
+                }, 800);
             }
         });
 
     }
 
     private void findViews(){
+        progressView = (CircularProgressView) findViewById(R.id.progress_view);
+
         mTvAuthor=(TextView)findViewById(R.id.tv_book_author);
         mTvPublisher=(TextView)findViewById(R.id.tv_book_publicer);
         mTvDate=(TextView)findViewById(R.id.tv_book_time);
@@ -94,10 +113,12 @@ public class BookViewActivity extends Activity {
     }
 
     public void getRequestData(String isbn){
+        startAnimationThreadStuff(100);
         RequestParams params=new RequestParams();
         BaseAsyncHttp.getReq("/v2/book/isbn/"+isbn,params,new HttpResponseHandler() {
             @Override
             public void jsonSuccess(JSONObject resp) {
+                progressView.setVisibility(View.GONE);
                 mBook=new Book();
                 mBook.setId(resp.optString("id"));
                 mBook.setRate(resp.optJSONObject("rating").optDouble("average"));
@@ -125,6 +146,15 @@ public class BookViewActivity extends Activity {
                 mBook.setContent(resp.optString("catalog"));
                 mBook.setUrl(resp.optString("ebook_url"));
                 updateToView();
+            }
+
+            @Override
+            public void jsonFail(JSONObject resp) {
+                progressView.setVisibility(View.GONE);
+                if (resp.optInt("code")==6000){
+                    Toast.makeText(BookViewActivity.this,"没有找到该图书或者不是图书的二维码",Toast.LENGTH_LONG).show();
+                    finish();
+                }
             }
         });
     }
@@ -164,40 +194,66 @@ public class BookViewActivity extends Activity {
         promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.weibo),R.drawable.weibo_back,new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(BookViewActivity.this,Share2Weibo.class);
-                BaseAsyncHttp.downloadFile(mBook.getBitmap());
-                intent.putExtra("url",mBook.getUrl());
-                intent.putExtra("score",mBook.getRate()+"");
-                intent.putExtra("picurl",mBook.getBitmap());
-                intent.putExtra("name",mBook.getTitle());
-                startActivity(intent);
+                String[] allowedContentTypes = new String[]{"image/png", "image/jpeg"};
+                BaseAsyncHttp.downloadFile(mBook.getBitmap(),new FileDownloadHandler(allowedContentTypes) {
+                    @Override
+                    public void DownSuccess() {
+                        Intent intent=new Intent(BookViewActivity.this,Share2Weibo.class);
+                        intent.putExtra("url",mBook.getUrl());
+                        intent.putExtra("score",mBook.getRate()+"");
+                        intent.putExtra("picurl",mBook.getBitmap());
+                        intent.putExtra("name",mBook.getTitle());
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void DownFail() {
+                        Toast.makeText(BookViewActivity.this,"分享失败：download picture fail",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.weixin),R.drawable.weixin_back, new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
-                BaseAsyncHttp.downloadFile(mBook.getBitmap());
-                intent.putExtra("url",mBook.getUrl());
-                intent.putExtra("score",mBook.getRate()+"");
-                intent.putExtra("picurl",mBook.getBitmap());
-                intent.putExtra("name",mBook.getTitle());
-                intent.putExtra("type",2);
-                startActivity(intent);
+                String[] allowedContentTypes = new String[]{"image/png", "image/jpeg"};
+                BaseAsyncHttp.downloadFile(mBook.getBitmap(),new FileDownloadHandler(allowedContentTypes) {
+                    @Override
+                    public void DownSuccess() {
+                        Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
+                        intent.putExtra("url",mBook.getUrl());
+                        intent.putExtra("score",mBook.getRate()+"");
+                        intent.putExtra("name",mBook.getTitle());
+                        intent.putExtra("type",2);
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void DownFail() {
+                        Toast.makeText(BookViewActivity.this,"分享失败：download picture fail",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
         promotedActionsLibrary.addItem(getResources().getDrawable(R.drawable.timeline),R.drawable.timeline_back,new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
-                BaseAsyncHttp.downloadFile(mBook.getBitmap());
-                intent.putExtra("url",mBook.getUrl());
-                intent.putExtra("score",mBook.getRate()+"");
-                intent.putExtra("picurl",mBook.getBitmap());
-                intent.putExtra("name",mBook.getTitle());
-                intent.putExtra("type",1);
-                startActivity(intent);
+                String[] allowedContentTypes = new String[]{"image/png", "image/jpeg"};
+                BaseAsyncHttp.downloadFile(mBook.getBitmap(),new FileDownloadHandler(allowedContentTypes) {
+                    @Override
+                    public void DownSuccess() {
+                        Intent intent=new Intent(BookViewActivity.this,Share2Weixin.class);
+                        intent.putExtra("url",mBook.getUrl());
+                        intent.putExtra("score",mBook.getRate()+"");
+                        intent.putExtra("name",mBook.getTitle());
+                        intent.putExtra("type",1);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void DownFail() {
+                        Toast.makeText(BookViewActivity.this,"分享失败：download picture fail",Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         promotedActionsLibrary.addMainItem(getResources().getDrawable(R.drawable.share),R.drawable.btn_back);
@@ -218,5 +274,34 @@ public class BookViewActivity extends Activity {
                 break;
         }
         return true;
+    }
+
+    private void startAnimationThreadStuff(long delay)
+    {
+        if(updateThread != null && updateThread.isAlive())
+            updateThread.interrupt();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                progressView.setVisibility(View.VISIBLE);
+                progressView.setProgress(0f);
+                progressView.startAnimation(); // Alias for resetAnimation, it's all the same
+                updateThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (progressView.getProgress() < progressView.getMaxProgress() && !Thread.interrupted()) {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressView.setProgress(progressView.getProgress() + 10);
+                                }
+                            });
+                            SystemClock.sleep(250);
+                        }
+                    }
+                });
+                updateThread.start();
+            }
+        }, delay);
     }
 }

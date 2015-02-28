@@ -35,13 +35,12 @@ public class Share2Weixin extends Activity{
         super.onCreate(savedInstanceState);
         final String name=getIntent().getStringExtra("name");
         final String url=getIntent().getStringExtra("url");
-        final String picurl=getIntent().getStringExtra("picurl");
         final String score=getIntent().getStringExtra("score");
         final int type=getIntent().getIntExtra("type",1);
-        share(Share2Weixin.this, type, name, score, url, picurl);
+        share(Share2Weixin.this, type, name, score, url);
     }
 
-    public void share(Context context,int type, String name,String score,String url,String picurl){
+    public void share(Context context,int type, String name,String score,String url){
         WXAPI = WXAPIFactory.createWXAPI(context, Constant.AppID);
         WXAPI.registerApp(Constant.AppID);
 

@@ -33,7 +33,17 @@
         android:label="@string/appname"
         android:theme="@style/CustomActionBarTheme" >
         <activity
+            android:name=".view.activity.SplashActivity"
+            android:theme="@style/NoActionBar"
+            android:label="@string/appname" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".view.activity.MainActivity"
+            android:theme="@style/TransparentTheme"
             android:label="@string/appname" >
         </activity>
         <activity
@@ -58,35 +68,34 @@
             android:theme="@style/CustomActionBarThemeBack"
             android:label="@string/title_activity_search" >
         </activity>
-        <activity android:name="com.scanbook.common.Share2Weixin"
+        <activity android:name=".common.Share2Weixin"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".view.activity.SplashActivity"
-            android:theme="@style/CustomActionBarThemeBack"
-            android:label="@string/appname" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.scanbook.view.activity.GuidePageActivity"
+            android:name=".view.activity.GuidePageActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.scanbook.view.activity.AboutActivity"
+        <activity
+            android:name=".view.activity.AboutActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/aboutme"
             android:theme="@style/CustomActionBarThemeBack"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.scanbook.common.Share2Weibo" android:configChanges="keyboardHidden|orientation" android:screenOrientation="portrait" >
+        <activity
+            android:name=".common.Share2Weibo"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" /> </intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
+
+        <!--广告SDK-->
         <activity android:name="mp.dt.aytp"
             android:theme="@android:style/Theme.Translucent" />
         <service android:name="mp.dt.lidpce" />
@@ -106,6 +115,7 @@
             </intent-filter>
         </receiver>
 
+        <!--友盟SDK-->
         <service
             android:name="com.umeng.update.net.DownloadingService"
             android:process=":DownloadingService" >

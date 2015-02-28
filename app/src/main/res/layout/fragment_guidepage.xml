@@ -9,13 +9,13 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="100dp"
         android:visibility="gone"
         android:background="@drawable/guide_btn"
         android:id="@+id/btn_guidepage_start"
         />
-	<ImageView
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 </RelativeLayout>

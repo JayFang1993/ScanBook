@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 import com.scanbook.R;
@@ -136,6 +137,10 @@ public class SearchActivity extends Activity {
                     mBooks.add(mBook);
                 }
                 updateToView();
+            }
+            @Override
+            public void jsonFail(JSONObject resp) {
+                Toast.makeText(SearchActivity.this, "网络出错", Toast.LENGTH_SHORT).show();
             }
         });
     }

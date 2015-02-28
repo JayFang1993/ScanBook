@@ -14,7 +14,7 @@ public class FileUtils {
 			return "";
 		}
 		File sdRoot=Environment.getExternalStorageDirectory();
-		File file=new File(sdRoot.getAbsolutePath()+"/scanbook");
+		File file=new File(sdRoot.getAbsolutePath()+"/ScanBook");
         if (!file.exists())
            file.mkdir();
         return file.getAbsolutePath();

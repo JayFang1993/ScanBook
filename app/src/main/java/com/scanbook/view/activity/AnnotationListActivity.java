@@ -47,9 +47,9 @@ public class AnnotationListActivity extends Activity{
 
     private int hasNum=0; //已经加载的数量
 
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_annotation);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_annotation);
 
         bookid=getIntent().getStringExtra("id");
         bookname=getIntent().getStringExtra("name");
@@ -99,7 +99,7 @@ public class AnnotationListActivity extends Activity{
         }, 200);
         mAdapter=new AnnotationAdapter(AnnotationListActivity.this,mAnnotations);
         mLvAnnotation.setAdapter(mAdapter);
-	}
+    }
 
     private void reqAnnotationList(int start,int count){
         RequestParams params=new RequestParams();
@@ -134,6 +134,11 @@ public class AnnotationListActivity extends Activity{
                 hasNum = mAnnotations.size();
                 mSrLayout.setRefreshing(false);
 
+            }
+
+            @Override
+            public void jsonFail(JSONObject resp) {
+                Toast.makeText(AnnotationListActivity.this,"网络出错",Toast.LENGTH_SHORT).show();
             }
         });
     }

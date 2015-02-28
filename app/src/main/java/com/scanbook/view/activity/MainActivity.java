@@ -1,4 +1,5 @@
 package com.scanbook.view.activity;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -9,10 +10,13 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.transition.Transition;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +31,9 @@ import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
 import com.umeng.update.UpdateStatus;
 
+import java.lang.reflect.Field;
+import java.util.Random;
+
 import mp.dt.c;
 
 /**
@@ -37,9 +44,9 @@ import mp.dt.c;
  */
 
 public class MainActivity extends Activity {
-    private TextView tx1;
-    private RelativeLayout mRlBtn;
+    private RelativeLayout mRlBtnScan,mRlBtnSearch;
     private MaterialDialog mMaterialDialog;
+    private ImageView mIvBack;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +59,6 @@ public class MainActivity extends Activity {
             public void onUpdateReturned(int updateStatus,final UpdateResponse updateInfo) {
                 switch (updateStatus) {
                     case UpdateStatus.Yes: // has update
-                        //UmengUpdateAgent.showUpdateDialog(MainActivity.this, updateInfo);
                         mMaterialDialog = new MaterialDialog(MainActivity.this);
                         mMaterialDialog.setTitle("扫扫图书"+updateInfo.version)
                                 .setMessage(updateInfo.updateLog)
@@ -83,27 +89,37 @@ public class MainActivity extends Activity {
         //广告sdk
         c.s(getApplicationContext(), "1054-3-7151");
 
-        //设置初始界面的显示
-        StringBuffer str=new StringBuffer();
-        str.append("1.按下扫描按钮启动摄像头，扫描并获取书籍的条形码；").append("\n");
-        str.append("2.查询书籍相关介绍信息；").append("\n");
-        str.append("3.显示在界面上").append("\n");
-//        tx1=(TextView)findViewById(R.id.main_textview01);
-//        tx1.setText(str.toString());
-        mRlBtn=(RelativeLayout)findViewById(R.id.rl_scan);
+        mRlBtnScan=(RelativeLayout)findViewById(R.id.rl_scan);
+        mRlBtnSearch=(RelativeLayout)findViewById(R.id.rl_search);
+        mIvBack=(ImageView)findViewById(R.id.iv_main_back);
 
-        
-        mRlBtn.setOnClickListener(new View.OnClickListener() {
+        Random random = new Random();
+        int i=Math.abs(random.nextInt())%5+1;
+        try{
+            Field field=R.drawable.class.getField("main_back"+i);
+            int j= field.getInt(new R.drawable());
+            mIvBack.setBackgroundResource(j);
+        }catch(Exception e){
+            mIvBack.setBackgroundResource(R.drawable.main_back1);
+        }
+
+        mRlBtnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Handler().postDelayed(new Runnable(){
-                    public void run() {
-                        Intent intent=new Intent(MainActivity.this,CaptureActivity.class);
-                        startActivityForResult(intent,100);
-                    }
-                }, 1000);
+                Intent intent=new Intent(MainActivity.this,CaptureActivity.class);
+                startActivityForResult(intent,100);
             }
         });
+
+        mRlBtnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+                startActivityForResult(intent,100);
+            }
+        });
+
+
     }
 
     protected void onActivityResult(int requestCode,int resultCode,Intent data)
@@ -122,6 +138,7 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main, menu);
+        getActionBar().setDisplayShowHomeEnabled(false);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -131,10 +148,6 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         Intent intent=null;
         switch (id){
-            case R.id.actionbar_search:
-                intent=new Intent(MainActivity.this,SearchActivity.class);
-                startActivity(intent);
-                break;
             case R.id.actionbar_aboutme:
                 intent=new Intent(MainActivity.this,AboutActivity.class);
                 startActivity(intent);
@@ -146,18 +159,13 @@ public class MainActivity extends Activity {
                                 "你可以给我邮件 JayFang1993@gmail.com，或者微博：@方杰_Jay，感谢你的反馈 ^ ^"
                         )
                         .setPositiveButton(
-                                "关注我", new View.OnClickListener() {
+                                "确定", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         mMaterialDialog.dismiss();
                                     }
                                 }
-                        ).setNegativeButton("取消",new View.OnClickListener(){
-                                @Override
-                                public void onClick(View view) {
-                                    mMaterialDialog.dismiss();
-                                }
-                            })
+                        )
                         .setCanceledOnTouchOutside(false)
                         .show();
                 break;

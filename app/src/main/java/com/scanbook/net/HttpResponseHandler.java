@@ -20,10 +20,11 @@ public abstract class HttpResponseHandler extends JsonHttpResponseHandler {
         jsonSuccess(response);
     }
     public abstract void jsonSuccess(JSONObject resp);
-
+    public abstract void jsonFail(JSONObject resp);
     @Override
-    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
         super.onFailure(statusCode, headers, throwable, errorResponse);
         Log.i("fangjie", "statusCode:"+statusCode);
+        jsonFail(errorResponse);
     }
 }

@@ -5,7 +5,7 @@
 
     <ImageView
         android:layout_width="fill_parent"
-        android:src="@drawable/main_back"
+        android:id="@+id/iv_main_back"
         android:layout_above="@+id/main_btns"
         android:scaleType="centerCrop"
         android:layout_height="match_parent">
@@ -17,56 +17,60 @@
         android:weightSum="2"
         android:orientation="horizontal"
         android:layout_height="120dp">
-        <com.scanbook.view.RippleView
+        <RelativeLayout
             android:id="@+id/rl_scan"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            ripple:rv_centered="true">
+            android:background="@color/white"
+            >
             <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_centerInParent="true"
                 android:text="扫描"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
                 android:textSize="18sp"
-                android:background="@color/white"
                 android:textColor="@color/gray"
                 />
             <ImageView
                 android:layout_width="wrap_content"
                 android:src="@drawable/scan"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content" />
-        </com.scanbook.view.RippleView>
+        </RelativeLayout>
         <ImageView
             android:layout_width="1px"
             android:src="@color/gray"
             android:layout_height="fill_parent" />
-        <com.scanbook.view.RippleView
+        <RelativeLayout
             android:id="@+id/rl_search"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            ripple:rv_centered="true">
+            android:background="@color/white"
+            >
             <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_centerInParent="true"
                 android:text="搜索"
-                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
                 android:textSize="18sp"
-                android:background="@color/white"
                 android:textColor="@color/gray"
                 />
             <ImageView
                 android:layout_width="wrap_content"
                 android:src="@drawable/search_black"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content" />
-        </com.scanbook.view.RippleView>
+        </RelativeLayout>
     </LinearLayout>
 
 

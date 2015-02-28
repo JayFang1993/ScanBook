@@ -218,17 +218,13 @@ private final Context context;
       if (camera == null) {
         return null;
       }
-        Log.i("fangjie","screenResolutionx:"+screenResolution.x);
-        Log.i("fangjie","screenResolutiony:"+screenResolution.y);
       int width = screenResolution.x * 3 / 4;
-      Log.i("fangjie","width:"+width);
       if (width < MIN_FRAME_WIDTH) {
         width = MIN_FRAME_WIDTH;
       }
 
       int height = width * 3 / 4;
 
-      Log.i("fangjie","height1:"+height);
       int leftOffset = (screenResolution.x - width) / 2;
       int topOffset = (screenResolution.y - height) / 2;
       framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);

@@ -60,6 +60,8 @@ public class Share2Weibo extends Activity implements IWeiboHandler.Response {
         mediaObject.title =name;
         mediaObject.description = name;
         mediaObject.setThumbImage(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+        if(url.equals(""))
+            url="http://book.douban.com";
         mediaObject.actionUrl =url;
         mediaObject.defaultText = "";
         return mediaObject;
