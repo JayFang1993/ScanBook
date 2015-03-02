@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--最普通的style -->
+    <style name="CustomActionBarTheme"
+        parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
+    </style>
+
+    <!-- ActionBar 样式 -->
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:titleTextStyle">@style/ActionBarTitle</item>
+        <item name="android:background">@color/actionbar</item>
+        <item name="android:icon">@android:color/transparent</item>
+    </style>
+
+    <!-- more icon 样式 -->
+    <style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/more</item>
+    </style>
+
+    <style name="ActionBarTitle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingLeft">180dp</item>
+    </style>
+
+    <!--带back返回上一级的style -->
+    <style name="CustomActionBarThemeBack"
+        parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBarBack</item>
+    </style>
+    <style name="MyActionBarBack"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:titleTextStyle">@style/ActionBarTitle</item>
+        <item name="android:background">@color/actionbar</item>
+        <item name="android:icon">@drawable/back</item>
+    </style>
+
+    <!--首页透明style -->
+    <style name="TransparentTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
+        <item name="android:actionBarStyle">@style/ActionBarStyle.Transparent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+    <style name="ActionBarStyle.Transparent" parent="@android:style/Widget.ActionBar">
+        <item name="android:background">@null</item>
+        <item name="android:displayOptions">homeAsUp|showHome|showTitle</item>
+        <item name="android:titleTextStyle">@style/ActionBarStyle.Transparent.TitleTextStyle</item>
+    </style>
+    <style name="ActionBarStyle.Transparent.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--Noactionbar -->
+    <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@null</item>
+    </style>
+
+
+</resources>
