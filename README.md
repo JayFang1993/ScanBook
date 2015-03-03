@@ -11,10 +11,10 @@
 注：请允许我上面一段肉麻的文案～～
 
 ### 应用截图
-![file-list](https://github.com/JayFang1993/ScanBook/blob/master/app/Screen/ScreenShot2.png)
-![file-list](https://github.com/JayFang1993/ScanBook/blob/master/app/Screen/ScreenShot1.png)
-![file-list](https://github.com/JayFang1993/ScanBook/blob/master/app/Screen/ScreenShot4.png)
-![file-list](https://github.com/JayFang1993/ScanBook/blob/master/app/Screen/ScreenShot3.png)
+![file-list](https://github.com/JayFang1993/ScanBook/blob/master/app/ScreenShot/1.png)
+![file-list](https://github.com/JayFang1993/ScanBook/blob/master/app/ScreenShot/4.png)
+![file-list](https://github.com/JayFang1993/ScanBook/blob/master/app/ScreenShot/2.png)
+![file-list](https://github.com/JayFang1993/ScanBook/blob/master/app/ScreenShot/3.png)
 
 ### 应用下载
 [http://www.wandoujia.com/apps/com.scanbook](http://www.wandoujia.com/apps/com.scanbook)
