@@ -139,6 +139,8 @@ public class MainActivity extends Activity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main, menu);
         getActionBar().setDisplayShowHomeEnabled(false);
+        getActionBar().setHomeButtonEnabled(false);// 不可点击
+        getActionBar().setDisplayHomeAsUpEnabled(false);// 去掉默认的返回箭头
         return super.onCreateOptionsMenu(menu);
     }
 
